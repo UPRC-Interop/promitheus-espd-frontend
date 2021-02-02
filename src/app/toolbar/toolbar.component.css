@@ -1,0 +1,102 @@
+/**
+ * Copyright 2016-2020 University of Piraeus Research Center
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.mat-toolbar {
+  margin-bottom: 20px;
+}
+
+ul li {
+  list-style: none;
+  display: inline;
+}
+
+ul li a {
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+}
+
+ul li a:visited {
+  text-decoration: none;
+  color: white;
+}
+
+ul li a:hover {
+  text-decoration: none;
+  border-bottom: 2px solid white;
+  padding-bottom: 5px;
+  color: white;
+}
+
+ul li a:active {
+  text-decoration: none;
+  border-bottom: 2px solid #E8EAF6;
+  color: #E8EAF6;
+}
+
+.fill {
+  display: flex;
+  align-items: flex-end;
+}
+
+#sub {
+  background-color: white;
+  color: #476065;
+}
+
+.logo {
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+}
+
+/*.mat-toolbar-row {*/
+/*overflow: hidden;*/
+/*}*/
+
+@media screen and (max-width: 500px) {
+  select {
+    display: none;
+  }
+
+  #lastBar {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 500px) {
+  select {
+    display: block;
+  }
+}
+
+.container {
+  height: 55px;
+  overflow: hidden;
+  width: 200px;
+}
+.platformInfo {
+  margin-right: 20px;
+  font-size: 12px;
+}
+
+ul > li {
+  display: inline-block;
+  margin-right: 10px;
+}

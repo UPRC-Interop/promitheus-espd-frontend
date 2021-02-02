@@ -1,0 +1,162 @@
+/**
+ * Copyright 2016-2020 University of Piraeus Research Center
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.columnList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  font-size: 1.6em;
+}
+
+mat-card {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+mat-card-content {
+  margin: 20px auto;
+  padding: 10px;
+}
+
+.logoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  /*display: inline-block;*/
+  width: 70%;
+  max-width: 650px;
+  height: auto;
+  /*margin: 0 auto;*/
+}
+
+.EUContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.EUlogo {
+  width: 60%;
+  max-width: 450px;
+  height: auto;
+}
+
+.text-container {
+  display: block;
+  width: 90%;
+  margin: 20px auto;
+}
+
+.text {
+  text-align: justify;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.content-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.langTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 450px) {
+  #videoplayer {
+    height: 180px;
+    width: 250px;
+  }
+}
+
+@media screen and (max-width: 800px) and (min-width: 450px) {
+  #videoplayer {
+    height: 217px;
+    width: 385px;
+  }
+}
+
+@media screen and (min-width: 800px) and (max-width: 1034px) {
+  #videoplayer {
+    height: 351px;
+    width: 620px;
+  }
+}
+
+@media screen and (min-width: 1034px) {
+  #videoplayer {
+    height: 480px;
+    width: 852px;
+  }
+}
+
+mat-card-subtitle {
+  text-align: center;
+}
+
+iframe {
+  display: block;
+  margin: 20px auto;
+}
+
+.flag {
+  display: block;
+}
+
+.flag-icon {
+  border-radius: 20%;
+  width: 80px;
+  height: 80px;
+}
+
+.langBlock {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  padding-left: 25px;
+  padding-right: 25px;
+  text-align: center;
+}
+
+.langBlock:hover {
+  cursor: pointer;
+}
+
+.invalid {
+  color: red;
+}
+
+.invalid-icon {
+  color: red;
+  display: inline-flex;
+  vertical-align: middle;
+}
+

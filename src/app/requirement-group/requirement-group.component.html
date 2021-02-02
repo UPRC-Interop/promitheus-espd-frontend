@@ -1,0 +1,54 @@
+<!--
+
+    Copyright 2016-2020 University of Piraeus Research Center
+    <p>
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    <p>
+        http://www.apache.org/licenses/LICENSE-2.0
+    <p>
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<div *ngIf="showIndicator">
+  <mat-card>
+    <mat-card-content>
+      <div *ngFor="let r of reqGroup.requirements" class="form-row"
+           [hidden]="((r.type === 'QUESTION' && utilities.isCA && !utilities.isReviewESPD) ||
+             (utilities.isEO && r.type ==='REQUIREMENT' && utilities.isCreateResponse))">
+        <app-requirement [req]="r"
+                         [form] = "form"
+                         (indicatorChanged)="childIndicatorChangedHandler($event)"></app-requirement>
+      </div>
+        <div *ngFor="let rg of reqGroup.requirementGroups; first as isFirst; index as i" class="form-row"
+             [hidden]="(((rg.type === 'QUESTION_SUBGROUP' || rg.type === 'QUESTION_GROUP') && utilities.isCA && !utilities.isReviewESPD))">
+          <app-requirement-group [reqGroup]="rg"
+                                 [form] = "form.get(rg.uuid)"
+                                 [indicator]="childIndicator"></app-requirement-group>
+          <div *ngIf="childIndicator && rg.multiple && !(utilities.CAReqExists(rg) && utilities.isEO)" style="text-align: right">
+            <div *ngIf="!utilities.isReviewESPD">
+              <button type="button" (click)="onAdd(rg, i)"><span class="material-icons" style="vertical-align: middle;">add_circle_outline</span>
+              </button>
+              <div *ngIf="!isFirst" class="remove-btn">
+                <button type="button" (click)="onRemove(rg)"><span class="material-icons" style="vertical-align: middle;">remove_circle_outline</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <!--<div *ngIf="rg.mandatory && rg.multiple" style="text-align: right">-->
+            <!--<button type="button" (click)="onAdd(rg.id)"><span class="material-icons" style="vertical-align: middle;">add_circle_outline</span></button>-->
+            <!--<button type="button" (click)="onRemove(rg)"><span class="material-icons" style="vertical-align: middle;">remove_circle_outline</span></button>-->
+          <!--</div>-->
+        </div>
+      <!--<div *ngIf="reqGroup.mandatory && reqGroup.multiple" style="text-align: right">-->
+        <!--<button type="button" (click)="onAdd(reqGroup.id)"><span class="material-icons" style="vertical-align: middle;">add_circle_outline</span></button>-->
+        <!--<button type="button" (click)="onRemove(reqGroup)"><span class="material-icons" style="vertical-align: middle;">remove_circle_outline</span></button>-->
+      <!--</div>-->
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,238 @@
+<!--
+
+    Copyright 2016-2020 University of Piraeus Research Center
+    <p>
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    <p>
+        http://www.apache.org/licenses/LICENSE-2.0
+    <p>
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<h4 translate>espd.part1.header</h4>
+<form #form="ngForm">
+  <mat-accordion multi="true">
+    <mat-expansion-panel expanded="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{'espd.part1.info.pub' | translate}}
+        </mat-panel-title>
+        <mat-panel-description>
+
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="desc">
+        <p translate>espd.part1.to.be.filled.alert</p>
+      </div>
+      <mat-form-field>
+        <!--<label for="noticeNumber">Received Notice Number</label>-->
+        <input matInput id="noticeNumber" name="receivedNoticeNumber"
+               [(ngModel)]="dataService.CADetails.receivedNoticeNumber"
+               placeholder="{{'espd.part1.ted.reception.id' | translate}}" [disabled]="dataService.isReadOnly()">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput name="noticeNumberOJS" [(ngModel)]="dataService.CADetails.procurementPublicationNumber"
+               placeholder="{{'espd.part1.ojs.label' | translate}}" [disabled]="dataService.isReadOnly()"
+               #numberOjs="ngModel" numberOjs>
+        <mat-error *ngIf="numberOjs.invalid">
+          <input-validation-error [formControlErrors]="numberOjs.errors"></input-validation-error>
+        </mat-error>
+      </mat-form-field>
+      <div class="desc">
+        <p translate>espd.part1.official.journal.alert</p>
+      </div>
+      <mat-form-field>
+        <input matInput name="ojsURL" placeholder="{{'espd.part1.ojs.url' | translate}}"
+               [(ngModel)]="dataService.CADetails.procurementPublicationURI" [disabled]="dataService.isReadOnly()"
+               #ojsurl="ngModel" url>
+        <mat-error *ngIf="ojsurl.invalid">
+          <input-validation-error [formControlErrors]="ojsurl.errors"></input-validation-error>
+        </mat-error>
+      </mat-form-field>
+      <div class="desc">
+        <p translate>espd.part1.official.journal.alert2</p>
+      </div>
+      <!--<mat-form-field>-->
+      <!--<input matInput name="nationalJournal" placeholder="National Official Journal" [(ngModel)]="dataService.CADetails.nationalOfficialJournal">-->
+      <!--</mat-form-field>-->
+
+
+    </mat-expansion-panel>
+    <mat-expansion-panel expanded="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{'espd.part1.contact.details.ca' | translate}}
+        </mat-panel-title>
+        <mat-panel-description>
+
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-form-field>
+        <input #CAofficialName="ngModel" matInput placeholder="{{'espd.part1.name' | translate}}" name="CAofficialName"
+               [(ngModel)]="dataService.CADetails.caofficialName" required [disabled]="dataService.isReadOnly()">
+        <mat-error *ngIf="CAofficialName.invalid">
+          <input-validation-error [formControlErrors]="CAofficialName.errors"></input-validation-error>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="{{'espd.part2.vat'| translate}}" name="CAofficialID"
+               [(ngModel)]="dataService.CADetails.id" [disabled]="dataService.isReadOnly()" #vat="ngModel"
+               vatNumber>
+        <mat-error *ngIf="vat.invalid">
+          <input-validation-error [formControlErrors]="vat.errors"></input-validation-error>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="{{'espd.part1.website' | translate}}" name="CAofficialWebSite"
+               [(ngModel)]="dataService.CADetails.webSiteURI" [disabled]="dataService.isReadOnly()"
+               #website="ngModel" url>
+        <mat-error *ngIf="website.invalid">
+          <input-validation-error [formControlErrors]="website.errors"></input-validation-error>
+        </mat-error>
+      </mat-form-field>
+      <ng-container *ngIf="dataService.CADetails.postalAddress || dataService.PostalAddress">
+        <mat-form-field>
+          <input matInput placeholder="{{'espd.part1.city' | translate}}" name="CAofficialCity"
+                 [(ngModel)]="dataService.PostalAddress.city" [disabled]="dataService.isReadOnly()">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="{{'espd.part1.street.and. num' | translate}}" name="CAofficialStreet"
+                 [(ngModel)]="dataService.PostalAddress.addressLine1" [disabled]="dataService.isReadOnly()">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="{{'espd.part1.postcode' | translate}}" name="CAofficialPostCode"
+                 [(ngModel)]="dataService.PostalAddress.postCode" [disabled]="dataService.isReadOnly()">
+        </mat-form-field>
+      </ng-container>
+      <ng-container *ngIf="dataService.CADetails.contactingDetails || dataService.ContactingDetails">
+        <mat-form-field>
+          <input matInput placeholder="{{'espd.part1.contact.person' | translate}}" name="CAofficialContactName"
+                 [(ngModel)]="dataService.ContactingDetails.contactPointName"
+                 [disabled]="dataService.isReadOnly()">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="{{'espd.part1.telephone' | translate}}" name="CAofficialContactTelephone"
+                 [(ngModel)]="dataService.ContactingDetails.telephoneNumber" [disabled]="dataService.isReadOnly()"
+                 #telephone="ngModel" phoneNumber>
+          <mat-error *ngIf="telephone.invalid">
+            <input-validation-error [formControlErrors]="telephone.errors"></input-validation-error>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="{{'espd.part1.fax' | translate}}" name="CAofficialContactFaxNumber"
+                 [(ngModel)]="dataService.ContactingDetails.faxNumber" [disabled]="dataService.isReadOnly()"
+                 #fax="ngModel" phoneNumber>
+          <mat-error *ngIf="fax.invalid">
+            <input-validation-error [formControlErrors]="fax.errors"></input-validation-error>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="{{'espd.part1.email' | translate}}" name="CAofficialContactEmail"
+                 [(ngModel)]="dataService.ContactingDetails.emailAddress" [disabled]="dataService.isReadOnly()"
+                 #email="ngModel" email>
+          <mat-error *ngIf="email.invalid">
+            <input-validation-error [formControlErrors]="email.errors"></input-validation-error>
+          </mat-error>
+        </mat-form-field>
+      </ng-container>
+      <mat-form-field>
+        <mat-select #CACountry="ngModel" name="CACountry" placeholder="{{'espd.part1.country' | translate}}"
+                    [(ngModel)]="dataService.selectedCountry" required [disabled]="dataService.isReadOnly()">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let country of codelist.countries" [value]="country.code">{{country.name}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="CACountry.invalid">
+          <input-validation-error [formControlErrors]="CACountry.errors"></input-validation-error>
+        </mat-error>
+      </mat-form-field>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel expanded="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{'espd.part1.info.procurement.proc' | translate}}
+        </mat-panel-title>
+        <mat-panel-description>
+
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-form-field>
+        <input matInput placeholder="{{'espd.part1.procurer.name' | translate}}" name="title" [(ngModel)]="dataService.CADetails.procurementProcedureTitle" [disabled]="dataService.isReadOnly()">
+      </mat-form-field>
+      <mat-form-field>
+        <!--<input matInput placeholder="Short Description">-->
+        <textarea matInput
+                  id="shortDesc" cols="30" rows="10"
+                  placeholder="{{'espd.part1.title.or.short.desc' | translate}}"
+                  name="description"
+                  [(ngModel)]="dataService.CADetails.procurementProcedureDesc" [disabled]="dataService.isReadOnly()">
+
+        </textarea>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="{{'espd.part1.file.ref.ca' | translate}}" name="fileReferenceNumber"
+               [(ngModel)]="dataService.CADetails.procurementProcedureFileReferenceNo" [disabled]="dataService.isReadOnly()">
+      </mat-form-field>
+      <!-- SELF-CONTAINED: Type of Procedure -->
+      <div *ngIf="utilities.qualificationApplicationType === 'selfcontained'">
+        <mat-form-field>
+          <mat-select placeholder="{{'espd.part1.info.procedure' | translate}}" name="typeOfProcedure"
+                      [(ngModel)]="dataService.CADetails.procurementProcedureType" [disabled]="dataService.isReadOnly()">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let proc of codelist.procedureTypes" [value]="proc.code">{{proc.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!-- SELF-CONTAINED: Bid Type - Object of Contracts -->
+        <mat-form-field>
+          <mat-select placeholder="{{'espd.part1.objects.of.contracts' | translate}}" name="projectType"
+                      [(ngModel)]="dataService.CADetails.projectType" [disabled]="dataService.isReadOnly()">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let project of codelist.projectTypes" [value]="project.code">{{project.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="cpv-chip-list">
+          <mat-chip-list #chipList [disabled]="disabled">
+            <mat-chip color='primary' selected=true *ngFor="let cpv of dataService.CADetails.classificationCodes" [selectable]="selectable"
+                      [removable]="removable" (removed)="remove(cpv)">
+              {{cpv}}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input placeholder="{{'espd.crit.cpv.code' | translate}}"
+                   [matChipInputFor]="chipList"
+                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                   [matChipInputAddOnBlur]="addOnBlur"
+                   (matChipInputTokenEnd)="add($event)">
+          </mat-chip-list>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput name="procurementProjectLots" placeholder="{{'espd.part2.number.lots' | translate}}" [(ngModel)]="dataService.CADetails.procurementProjectLots"
+                 [disabled]="dataService.isReadOnly()">
+        </mat-form-field>
+        <div *ngIf="utilities.isDividedIntoLots">
+          <ng-container *ngIf="dataService.caRelatedCriteriaForm">
+            <form [formGroup]="dataService.caRelatedCriteriaForm">
+              <div class="eoRelatedCriteria" *ngFor="let cr of dataService.caRelatedCriteria; let i=index">
+                <mat-card>
+                  <h4>{{cr.propertyKeyMap.pk2 | translate}}</h4>
+                  <div class="answer">
+                    <app-criterion [criterion]="cr" [form]="dataService.caRelatedCriteriaForm.controls" [indicator]="true"></app-criterion>
+                  </div>
+                </mat-card>
+              </div>
+            </form>
+          </ng-container>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <button mat-raised-button color="primary" matStepperPrevious>{{'espd.gui.previous' | translate}}</button>
+  <button type="button" mat-raised-button color="primary" matStepperNext (click)="onProcedureSubmit(form)">{{'espd.gui.next' | translate}}</button>
+</form>
