@@ -1,0 +1,128 @@
+<!--
+
+    Copyright 2016-2020 University of Piraeus Research Center
+    <p>
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    <p>
+        http://www.apache.org/licenses/LICENSE-2.0
+    <p>
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<div id="languageSwitcher" *ngIf="utilities.initLanguage">
+  <mat-card>
+    <div class="logoContainer">
+      <img alt="promitheus-logo" class="logo" src="./assets/images/PromitheusESPDint_logo.png">
+    </div>
+      <div class="langTitle">
+        <mat-card-subtitle>{{"ges.landing.page.choose.language" | translate}}
+        </mat-card-subtitle>
+      </div>
+      <div class="content-container">
+        <mat-card-content>
+          <div class="columnList">
+            <div *ngFor="let lang of dataService.langNames" (click)="onLanguageSelection(lang)">
+              <div class="langBlock">
+                <span class="block" class="flag-icon flag-icon-{{dataService.langISOCodes[lang].toLowerCase()}}"></span>
+                <span class="block">{{lang}}</span>
+              </div>
+            </div>
+          </div>
+          <iframe frameborder="0" id="videoplayer"
+                  src="https://audiovisual.ec.europa.eu/embed/index.html?ref=I-125339&lg=EN%2FEL"
+                  scrolling="no" webkitAllowFullScreen="true" mozallowfullscreen="true" allowFullScreen="true"></iframe>
+
+          <div class="text-container">
+            <p class="text" [innerHTML]="'ges.landing.page.text' | translate"></p></div>
+
+          <div class="EUContainer">
+            <img alt="cef-logo" class="EUlogo" src="./assets/images/{{utilities.logo}}">
+          </div>
+        </mat-card-content>
+      </div>
+  </mat-card>
+</div>
+
+
+<div class="container" *ngIf="utilities.start">
+
+  <mat-horizontal-stepper (selectionChange)="validateSteps($event)" (animationDone)="changeURL()" [linear]="isLinear" #stepper="matHorizontalStepper">
+    <mat-step>
+      <ng-template matStepLabel>
+        <div [class.invalid]="!startStepValid">
+          <mat-icon *ngIf="!startStepValid" class="invalid-icon">warning</mat-icon>
+          <span>{{'espd.gui.progress.start' | translate}}</span>
+        </div>
+      </ng-template>
+      <app-start #startComponent [parentStepper]="stepper"></app-start>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>
+        <div [class.invalid]="!procedureStepValid">
+          <mat-icon *ngIf="!procedureStepValid" class="invalid-icon">warning</mat-icon>
+          <span>{{'espd.gui.progress.procedure' | translate}}</span>
+        </div>
+      </ng-template>
+      <app-procedure *ngIf="utilities.isCA && !dataService.isReadOnly()" #procedureCaComponent></app-procedure>
+      <app-procedure-eo *ngIf="utilities.isEO || (utilities.isCA && dataService.isReadOnly())"
+                        #procedureEoComponent></app-procedure-eo>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>
+        <div [class.invalid]="!exclusionStepValid">
+          <mat-icon *ngIf="!exclusionStepValid" class="invalid-icon">warning</mat-icon>
+          <span>{{'espd.gui.progress.exclusion' | translate}}</span>
+        </div>
+      </ng-template>
+      <app-exclusion
+                      *ngIf="utilities.isCA && !dataService.isReadOnly()"
+                      #exclusionCaComponent></app-exclusion>
+      <app-exclusion-eo
+                        *ngIf="utilities.isEO || (utilities.isCA && dataService.isReadOnly())"
+                        #exclusionEoComponent></app-exclusion-eo>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>
+        <div [class.invalid]="!selectionStepValid">
+          <mat-icon *ngIf="!selectionStepValid" class="invalid-icon">warning</mat-icon>
+          <span>{{'espd.gui.progress.selection' | translate}}</span>
+        </div>
+      </ng-template>
+      <app-selection
+                      *ngIf="utilities.isCA && !dataService.isReadOnly()"
+                      #selectionCaComponent></app-selection>
+      <app-selection-eo
+                        *ngIf="utilities.isEO || (utilities.isCA && dataService.isReadOnly())"
+                        #selectionEoComponent></app-selection-eo>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>
+        <div [class.invalid]="!finishStepValid">
+          <mat-icon *ngIf="!finishStepValid" class="invalid-icon">warning</mat-icon>
+          <span>{{'espd.gui.progress.finish' | translate}}</span>
+        </div>
+      </ng-template>
+      <app-finish *ngIf="utilities.isCA && !dataService.isReadOnly()"
+                  [startStepValid]="startStepValid"
+                  [procedureStepValid]="procedureStepValid"
+                  [exclusionStepValid]="exclusionStepValid"
+                  [selectionStepValid]="selectionStepValid"
+                  [finishStepValid]="finishStepValid"
+                  #finishCaComponent></app-finish>
+      <app-finish-eo *ngIf="utilities.isEO || (utilities.isCA && dataService.isReadOnly())"
+                     [startStepValid]="startStepValid"
+                     [procedureStepValid]="procedureStepValid"
+                     [exclusionStepValid]="exclusionStepValid"
+                     [selectionStepValid]="selectionStepValid"
+                     [finishStepValid]="finishStepValid"
+                      #finishEoComponent></app-finish-eo>
+    </mat-step>
+  </mat-horizontal-stepper>
+
+</div>

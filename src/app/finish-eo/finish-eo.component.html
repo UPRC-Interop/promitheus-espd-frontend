@@ -1,0 +1,136 @@
+<!--
+
+    Copyright 2016-2020 University of Piraeus Research Center
+    <p>
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    <p>
+        http://www.apache.org/licenses/LICENSE-2.0
+    <p>
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<h4 translate>espd.part5.header</h4>
+<div *ngIf="dataService.reductionCriteria != null">
+  <div *ngIf="utilities.isCreateResponse || (APIService.version === 'v1')">
+    <mat-card>
+      <h4>{{'espd.part5.toptext' | translate}}</h4>
+    </mat-card>
+    <ng-container *ngIf="dataService.reductionCriteria.length !== 0">
+      <mat-card *ngFor="let criteria of dataService.reductionCriteria; let i = index">
+        <div class="exclusionCriteria" >
+          <div class="criteria">
+            <mat-checkbox color="primary"
+                          name='{{criteria.name+i}}'
+                          [(ngModel)]="dataService.reductionCriteria[i].selected"
+                          [disabled]="dataService.isReadOnly()"></mat-checkbox>
+            {{'espd.part5.reduction.hint' | translate}}
+          </div>
+        </div>
+      </mat-card>
+    </ng-container>
+  </div>
+
+</div>
+<mat-accordion multi="true">
+  <div *ngIf="dataService.reductionCriteria != null">
+    <div *ngIf="(utilities.isImportandReductionExists(dataService.reductionCriteria, utilities.reductionUUID) || utilities.isCreateResponse) && utilities.isCriterionSelected(dataService.reductionCriteria, utilities.reductionUUID)">
+      <ng-container *ngIf="dataService.reductionCriteriaForm">
+        <form [formGroup]="dataService.reductionCriteriaForm" #form="ngForm">
+          <mat-expansion-panel expanded="true" *ngIf="dataService.reductionCriteria">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{'espd.part5.reduction' | translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="desc">
+              <div *ngIf="!utilities.isCreateResponse && !(APIService.version === 'v1')">
+                <mat-card>
+                  <h4>{{'espd.part5.toptext' | translate}}</h4>
+                </mat-card>
+              </div>
+              <mat-card *ngFor="let cr of dataService.reductionCriteria; let i = index">
+                <div class="reductionCriteria">
+                  <div class="criterion-wrap">
+                    <div class="criteria">
+                      <h4 translate>espd.part5.reduction.question</h4>
+                      <h4>{{cr.propertyKeyMap.pk1 | translate}}</h4>
+                      <div class="critDesc">{{cr.propertyKeyMap.pk2 | translate}}</div>
+                    </div>
+                  </div>
+                  <div class="answer">
+                    <app-criterion [criterion]="cr" [form]="dataService.reductionCriteriaForm.controls"
+                                   [indicator]="true"></app-criterion>
+                  </div>
+
+                </div>
+              </mat-card>
+            </div>
+          </mat-expansion-panel>
+        </form>
+      </ng-container>
+    </div>
+  </div>
+  <mat-expansion-panel expanded="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{'espd.part5.concl.statements' | translate}}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="desc">
+      <p translate>espd.part5.concl.statements.text.part1</p>
+      <p translate>espd.part5.concl.statements.text.part2</p>
+      <p translate>espd.part5.concl.statements.text.part3</p>
+      <p translate>espd.part5.concl.statements.text.part4</p>
+      <p translate>espd.part5.concl.statements.text.part5</p>
+<!--      <p translate>espd.part5.concl.statements.signature</p>-->
+
+      <div [hidden]="true">
+        <mat-form-field>
+          <input [appDateValidationFix]="dateInput.control" matInput [matDatepicker]="picker" placeholder="Date"
+                 #dateInput="ngModel" ngModel
+                 [disabled]="dataService.isReadOnly()">
+          <mat-error *ngIf="dateInput.control.invalid">
+            <input-validation-error [formControlErrors]="dateInput.control.errors"></input-validation-error>
+          </mat-error>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+<!--      <mat-form-field>-->
+<!--        <input matInput placeholder="{{'espd.gui.place' | translate}}" [disabled]="dataService.isReadOnly()">-->
+<!--      </mat-form-field>-->
+<!--      <p translate>espd.part5.concl.statements.signature</p>-->
+    </div>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel expanded="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{'espd.part5.export' | translate}}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="desc">
+      <p [innerHTML]="'espd.part5.export.content' | translate"></p>
+    </div>
+  </mat-expansion-panel>
+
+
+</mat-accordion>
+
+<button mat-raised-button color="primary" matStepperPrevious [innerHTML]="'espd.gui.previous' | translate"></button>
+<ng-container *ngIf="!dataService.isReadOnly()">
+  <button [disabled]="!isExportPossible()" type="submit" mat-raised-button color="primary" matStepperNext (click)="onXmlExport()">{{'espd.part5.export' | translate}} (XML)</button>
+  <button [disabled]="!isExportPossible()" type="submit" *ngIf="dataService.isVersionTwo()" mat-raised-button color="primary" matStepperNext (click)="onHtmlExport()">{{'espd.part5.export' | translate}} (HTML)</button>
+  <button [disabled]="!isExportPossible()" type="submit"  mat-raised-button color="primary" matStepperNext (click)="onPdfExport()">{{'espd.part5.export' | translate}} (PDF)</button>
+  <ngx-loading [show]="utilities.isLoading" [config]="{ backdropBorderRadius: '3px', fullScreenBackdrop: true }"></ngx-loading>
+</ng-container>
+
+<!--<button type="submit" mat-raised-button color="primary" matStepperNext (click)="onExportV2()">Export V2</button>-->
+

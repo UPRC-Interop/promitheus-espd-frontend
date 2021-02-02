@@ -1,0 +1,351 @@
+<!--
+
+    Copyright 2016-2020 University of Piraeus Research Center
+    <p>
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    <p>
+        http://www.apache.org/licenses/LICENSE-2.0
+    <p>
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<!--p>{{req.uuid}}</p-->
+
+<div [formGroup]="form">
+  <div>
+    <label *ngIf="req.responseDataType=='INDICATOR'" [attr.for]="req.uuid">{{req.propertyKeyMap.pk1 | translate}}</label>
+    <label *ngIf="req.responseDataType=='CODE_BOOLEAN'" [attr.for]="req.uuid">{{req.propertyKeyMap.pk1 | translate}}</label>
+    <label *ngIf="req.responseDataType=='WEIGHT_INDICATOR' && utilities.isGloballyWeighted" [attr.for]="req.uuid">{{req.propertyKeyMap.pk1 | translate}}</label>
+  </div>
+
+  <!--SELF-CONTAINED: Hide the QUESTION fields if the user is a CA making a Request. Render only the REQUIREMENT and CAPTION fields.
+  Don't show the REQUIREMENT fields if the user has the role of EO and creates a new ESPD response from scratch-->
+  <div [ngSwitch]="req.responseDataType" [hidden]="(utilities.isCA && req.type === 'QUESTION' && !utilities.isReviewESPD)
+  || (utilities.isEO && req.type ==='REQUIREMENT' && utilities.isCreateResponse)
+  || req.type === 'CAPTION'">
+    <div *ngSwitchDefault>
+      <div *ngIf="req.type === 'CAPTION'">
+        <!-- SKIP captions and deal with question and requirement only -->
+      </div>
+      <div *ngIf="req.type === 'QUESTION'">
+        <mat-form-field>
+          <!--<label [attr.for]="req.uuid">{{req.description}}</label>-->
+          <!--<br>-->
+          <input matInput [formControlName]="req.uuid" [id]="req.uuid" [required]="req.mandatory" placeholder="{{req.propertyKeyMap.pk1 | translate }}">
+          <mat-error *ngIf="form.get(req.uuid).invalid">
+            <input-validation-error [formControlErrors]="form.get(req.uuid).errors"></input-validation-error>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div *ngIf="req.type === 'REQUIREMENT'">
+        <mat-form-field>
+          <!--<label [attr.for]="req.uuid">{{req.description}}</label>-->
+          <!--<br>-->
+          <input matInput [formControlName]="req.uuid" [id]="req.uuid" [required]="req.mandatory"
+                 placeholder="{{req.propertyKeyMap.pk1 | translate}}" >
+          <mat-error *ngIf="form.get(req.uuid).invalid">
+            <input-validation-error [formControlErrors]="form.get(req.uuid).errors"></input-validation-error>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <mat-form-field *ngSwitchCase="'QUANTITY_YEAR'">
+<!--      <label [attr.for]="req.uuid">{{req.propertyKeyMap.pk1 | translate}}</label>-->
+<!--      <br>-->
+      <input matInput [formControlName]="req.uuid" [id]="req.uuid" [required]="req.mandatory" placeholder="{{req.propertyKeyMap.pk1 | translate }}" integer>
+      <mat-error *ngIf="form.get(req.uuid).invalid">
+        <input-validation-error [formControlErrors]="form.get(req.uuid).errors"></input-validation-error>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field *ngSwitchCase="'QUANTITY_INTEGER'">
+<!--      <label [attr.for]="req.uuid">{{req.propertyKeyMap.pk1 | translate}}</label>-->
+<!--      <br>-->
+      <input matInput [formControlName]="req.uuid" [id]="req.uuid" [required]="req.mandatory" placeholder="{{req.propertyKeyMap.pk1 | translate }}" integer>
+      <mat-error *ngIf="form.get(req.uuid).invalid">
+        <input-validation-error [formControlErrors]="form.get(req.uuid).errors"></input-validation-error>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field *ngSwitchCase="'DATE'">
+      <!--<label [attr.for]="req.uuid">{{req.description}}</label>-->
+      <!--<br>-->
+      <input [appDateValidationFix]="form.get(req.uuid)" matInput [matDatepicker]="picker" [formControlName]="req.uuid"
+             placeholder="{{req.propertyKeyMap.pk1 | translate}}"
+             [id]="req.uuid" [required]="req.mandatory">
+      <mat-error *ngIf="form.get(req.uuid).invalid">
+        <input-validation-error [formControlErrors]="form.get(req.uuid).errors"></input-validation-error>
+      </mat-error>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <div *ngSwitchCase="'PERCENTAGE'">
+      <label class="no-margin" [attr.for]="req.uuid">{{req.propertyKeyMap.pk1 | translate}}</label>
+      <mat-form-field>
+        <input matInput [formControlName]="req.uuid" [id]="req.uuid" percentage [required]="req.mandatory">
+        <span matPrefix>%&nbsp;</span>
+        <mat-error *ngIf="form.get(req.uuid).invalid">
+          <input-validation-error [formControlErrors]="form.get(req.uuid).errors"></input-validation-error>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="period" *ngSwitchCase="'PERIOD'" >
+      <div class="periodv2" *ngIf="APIService.version === 'v2'">
+        <!--<label [attr.for]="req.uuid+'startDate'">Start Date: </label>-->
+        <!--<br>-->
+        <mat-form-field >
+          <input placeholder="{{'espd.crit.start.date' | translate}}" [appDateValidationFix]="form.get(req.uuid+'startDate')" matInput [matDatepicker]="startPicker"
+                 [formControlName]="req.uuid+'startDate'" [id]="req.uuid+'startDate'" [required]="req.mandatory">
+          <mat-error *ngIf="form.get(req.uuid+'startDate').invalid">
+            <input-validation-error [formControlErrors]="form.get(req.uuid+'startDate').errors"></input-validation-error>
+          </mat-error>
+          <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+          <mat-datepicker #startPicker></mat-datepicker>
+        </mat-form-field>
+        <br>
+        <!--<label [attr.for]="req.uuid+'endDate'">End Date: </label>-->
+        <!--<br>-->
+        <mat-form-field >
+          <input  placeholder="{{'espd.crit.end.date' | translate}}" [appDateValidationFix]="form.get(req.uuid+'endDate')" matInput [matDatepicker]="endPicker"
+                 [formControlName]="req.uuid+'endDate'" [id]="req.uuid+'endDate'" [required]="req.mandatory">
+          <mat-error *ngIf="form.get(req.uuid+'endDate').invalid">
+            <input-validation-error [formControlErrors]="form.get(req.uuid+'endDate').errors"></input-validation-error>
+          </mat-error>
+          <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+          <mat-datepicker #endPicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="periodv1" *ngIf="APIService.version === 'v1'">
+        <!--<label [attr.for]="req.uuid">{{req.description}}</label>-->
+        <!--<br>-->
+        <mat-form-field >
+          <input matInput [formControlName]="req.uuid" [id]="req.uuid" placeholder="{{req.propertyKeyMap.pk1 | translate}}" >
+        </mat-form-field>
+      </div>
+    </div>
+    <div *ngSwitchCase="'CODE'">
+      <div *ngIf="APIService.version === 'v1' && req.responseValuesRelatedArtefact === null">
+        <mat-form-field >
+          <input matInput [formControlName]="req.uuid" [id]="req.uuid" placeholder="{{req.propertyKeyMap.pk1 | translate}}" [required]="req.mandatory" >
+          <mat-error *ngIf="form.get(req.uuid).invalid">
+            <input-validation-error [formControlErrors]="form.get(req.uuid).errors"></input-validation-error>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div [ngSwitch]="req.responseValuesRelatedArtefact">
+        <mat-form-field *ngSwitchCase="'BidType'">
+          <!--<label [attr.for]="req.uuid">{{req.description}}</label>-->
+          <!--<br>-->
+          <mat-select [formControlName]="req.uuid" [id]="req.uuid" placeholder="{{req.propertyKeyMap.pk1 | translate}}">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let bid of codelist.bidTypes" [value]="bid.code">{{bid.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field *ngSwitchCase="'FinancialRatioType'">
+          <!--<label [attr.for]="req.uuid">{{req.description}}</label>-->
+          <!--<br>-->
+          <mat-select [formControlName]="req.uuid" [id]="req.uuid" placeholder="{{req.propertyKeyMap.pk1 | translate}}">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let type of codelist.financialRatioTypes" [value]="type.code">{{type.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field *ngSwitchCase="'EORoleType'">
+          <!--<label [attr.for]="req.uuid">{{req.description}}</label>-->
+          <!--<br>-->
+          <mat-select  [formControlName]="req.uuid" [id]="req.uuid" placeholder="{{req.propertyKeyMap.pk1 | translate}}">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let role of codelist.eoRoleTypes" [value]="role.code">{{role.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div *ngSwitchCase="'CPVCodes'">
+          <!-- TODO cpvs like the classificationCodes -->
+          <mat-form-field class="cpv-chip-list">
+            <mat-chip-list #chipList [disabled]="disabled">
+              <mat-chip color='primary' selected=true *ngFor="let cpv of cpvCodes" [selectable]="selectable"
+                        [removable]="removable" (removed)="remove(cpv)">
+                {{cpv}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input placeholder="{{'espd.crit.cpv.code' | translate}}"
+                     [matChipInputFor]="chipList"
+                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                     [matChipInputAddOnBlur]="addOnBlur"
+                     (matChipInputTokenEnd)="add($event)">
+            </mat-chip-list>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+
+
+    <mat-form-field *ngSwitchCase="'CODE_COUNTRY'">
+      <!--<label [attr.for]="req.uuid">{{req.description}}</label>-->
+      <!--<br>-->
+      <mat-select [formControlName]="req.uuid" [id]="req.uuid" [required]="req.mandatory" placeholder="{{req.propertyKeyMap.pk1 | translate}}">
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let country of codelist.countries" [value]="country.code">{{country.name}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get(req.uuid).invalid">
+        <input-validation-error [formControlErrors]="form.get(req.uuid).errors"></input-validation-error>
+      </mat-error>
+    </mat-form-field>
+
+    <div class="amount" *ngSwitchCase="'AMOUNT'">
+      <!--<label [attr.for]="req.uuid">{{req.description}}</label>-->
+      <!--<br>-->
+      <mat-form-field>
+        <input matInput [formControlName]="req.uuid" [id]="req.uuid" amount [required]="req.mandatory" placeholder="{{req.propertyKeyMap.pk1 | translate}}">
+        <mat-error *ngIf="form.get(req.uuid).invalid">
+          <input-validation-error [formControlErrors]="form.get(req.uuid).errors"></input-validation-error>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select [formControlName]="req.uuid+'currency'" [id]="req.uuid+'currency'" [required]="req.mandatory" placeholder="{{'espd.part2.currency' | translate}}">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let curr of codelist.currency" [value]="curr.code">{{curr.code}} ( {{curr.name}} )</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get(req.uuid+'currency').invalid">
+          <input-validation-error [formControlErrors]="form.get(req.uuid+'currency').errors"></input-validation-error>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="evidence_identifier" *ngSwitchCase="'EVIDENCE_IDENTIFIER'">
+      <!--<label [attr.for]="req.uuid+'evidenceUrl'">URL: </label>-->
+      <!--<br>-->
+      <mat-form-field>
+        <input matInput [formControlName]="req.uuid+'evidenceUrl'" [id]="req.uuid+'evidenceUrl'" placeholder="{{'espd.crit.url' | translate}}"
+               [required]="req.mandatory">
+        <mat-error *ngIf="form.controls[''+ req.uuid+'evidenceUrl'].invalid">
+          <input-validation-error
+            [formControlErrors]="form.controls[''+ req.uuid+'evidenceUrl'].errors"></input-validation-error>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [formControlName]="req.uuid+'evidenceIssuer'" [id]="req.uuid+'evidenceIssuer'" placeholder="{{'espd.crit.issuer' | translate}}"
+               [required]="req.mandatory">
+        <mat-error *ngIf="form.controls[''+ req.uuid+'evidenceIssuer'].invalid">
+          <input-validation-error
+            [formControlErrors]="form.controls[''+ req.uuid+'evidenceIssuer'].errors"></input-validation-error>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [formControlName]="req.uuid+'evidenceCode'" [id]="req.uuid+'evidenceCode'" placeholder="{{'espd.crit.code' | translate}}"
+               [required]="req.mandatory">
+        <mat-error *ngIf="form.controls[''+ req.uuid+'evidenceCode'].invalid">
+          <input-validation-error
+            [formControlErrors]="form.controls[''+ req.uuid+'evidenceCode'].errors"></input-validation-error>
+        </mat-error>
+      </mat-form-field>
+      <!--<label [attr.for]="req.uuid+'evidenceIssuer'">Issuer: </label>-->
+      <!--<br>-->
+    </div>
+
+
+    <mat-radio-group [id]="req.uuid" *ngSwitchCase="'INDICATOR'" [formControlName]="req.uuid">
+      <mat-radio-button color="primary"
+                        [value]=true>{{"espd.gui.yes" | translate}}
+      </mat-radio-button>
+      <mat-radio-button color="primary"
+                        [value]=false>{{"espd.gui.no" | translate}}
+      </mat-radio-button>
+    </mat-radio-group>
+
+    <!-- SELF-CONTAINED 2.1.0: CODE_BOOLEAN PropertyDataType -->
+    <mat-radio-group [id]="req.uuid" *ngSwitchCase="'CODE_BOOLEAN'" [formControlName]="req.uuid">
+      <mat-radio-button color="primary"
+                        [value]=true>{{"espd.gui.yes" | translate}}
+      </mat-radio-button>
+      <mat-radio-button color="primary"
+                        [value]=false>{{"espd.gui.no" | translate}}
+      </mat-radio-button>
+    </mat-radio-group>
+
+    <!-- SELF-CONTAINED: WEIGHT_INDICATOR -->
+    <div class="weight_indicator" *ngSwitchCase="'WEIGHT_INDICATOR'">
+      <div *ngIf="utilities.isGloballyWeighted">
+        <mat-radio-group [id]="req.uuid" [formControlName]="req.uuid">
+          <mat-radio-button color="primary"
+                            [value]=true>{{"espd.gui.yes" | translate}}
+          </mat-radio-button>
+          <mat-radio-button color="primary"
+                            [value]=false>{{"espd.gui.no" | translate}}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <br>
+      <div class="weight" *ngIf="isWeighted">
+        <!-- REMOVED: EvaluationMethodType dropdown, the user answers YES/NO to the question and the dropdown is redundant -->
+        <!--<label [attr.for]="req.uuid+'evaluationMethodType'">Criterion evaluation method: </label>-->
+        <!--<br>-->
+        <!--<mat-form-field>-->
+          <!--<mat-select [formControlName]="req.uuid+'evaluationMethodType'" [id]="req.uuid+'evaluationMethodType'">-->
+            <!--<mat-option>None</mat-option>-->
+            <!--<mat-option *ngFor="let type of evaluationMethodTypes" [value]="type.code">{{type.code}} ( {{type.name}} )</mat-option>-->
+          <!--</mat-select>-->
+        <!--</mat-form-field>-->
+        <!--<label [attr.for]="req.uuid+'weight'">Weight allocated to this criterion: </label>-->
+        <!--<br>-->
+        <mat-form-field>
+          <input matInput [formControlName]="req.uuid+'weight'" [id]="req.uuid+'weight'" placeholder="{{'espd.part4.crit.weighting.allocated' | translate}}">
+        </mat-form-field>
+        <!--<label [attr.for]="req.uuid+'evaluationMethodDescription'">Provide complementary information about the evaluation of the criterion: </label>-->
+        <!--<br>-->
+        <mat-form-field>
+          <textarea matInput placeholder="{{'espd.part4.crit.weigthing.information' | translate}}"
+                    [formControlName]="req.uuid+'evaluationMethodDescription'" [id]="req.uuid+'evaluationMethodDescription'"
+                    id="shortDesc" cols="30" rows="10">
+          </textarea>
+          <!--<input matInput [formControlName]="req.uuid+'evaluationMethodDescription'" [id]="req.uuid+'evaluationMethodDescription'" >-->
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- SELF-CONTAINED: EO_IDENTIFIER -->
+    <div class="eo_identifier" *ngSwitchCase="'ECONOMIC_OPERATOR_IDENTIFIER'">
+      <!--<label [attr.for]="req.uuid">{{req.description}}</label>-->
+      <!--<br>-->
+      <mat-form-field>
+        <input matInput [formControlName]="req.uuid" [id]="req.uuid" placeholder="{{'espd.crit.entity.ID' | translate}}">
+      </mat-form-field>
+      <!--<label [attr.for]="req.uuid+'eoidtype'">Type of ID: </label>-->
+      <!--<br>-->
+      <mat-form-field>
+        <mat-select [formControlName]="req.uuid+'eoidtype'" [id]="req.uuid+'eoidtype'" placeholder="{{'espd.crit.type.id' | translate}}">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let type of codelist.eoIDType" [value]="type.code">{{type.code}} ( {{type.name}} )</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <!-- SELF-CONTAINED: LOT_IDENTIFIER -->
+    <div class="lots_identifier" *ngSwitchCase="'LOT_IDENTIFIER'">
+      <mat-selection-list [formControlName]="req.uuid">
+        <mat-list-option *ngFor="let lot of utilities.projectLots" [value]="lot">
+          {{lot}}
+        </mat-list-option>
+      </mat-selection-list>
+    </div>
+
+    <!-- SELF-CONTAINED 2.1.0: ECONOMIC_OPERATOR_ROLE_CODE -->
+    <!--<mat-form-field *ngSwitchCase="'ECONOMIC_OPERATOR_ROLE_CODE'">-->
+      <!--<label [attr.for]="req.uuid">{{req.description}}</label>-->
+      <!--<br>-->
+      <!--<mat-select  [formControlName]="req.uuid" [id]="req.uuid">-->
+        <!--<mat-option>None</mat-option>-->
+        <!--<mat-option *ngFor="let role of codelist.eoRoleTypes" [value]="role.code">{{role.name}}</mat-option>-->
+      <!--</mat-select>-->
+    <!--</mat-form-field>-->
+
+  </div>
+</div>
+
+
+

@@ -1,0 +1,92 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$gsccp-theme-colors: (
+  50: #e9eced,
+  100: #C8CFD1,
+  200: #A3B0B2,
+  300: #7E9093,
+  400: #63787C,
+  500: #476065,
+  600: #40585D,
+  700: #374E53,
+  800: #2F4449,
+  900: #203337,
+  A100: #7FE7FF,
+  A200: #4CDDFF,
+  A400: #19D3FF,
+  A700: #00CEFE,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: $black-87-opacity,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: $black-87-opacity,
+    A200: $black-87-opacity,
+    A400: $black-87-opacity,
+    A700: white,
+  )
+);
+
+$gsccp-palette-primary: mat-palette($gsccp-theme-colors);
+$gsccp-palette-accent:  mat-palette($gsccp-theme-colors);
+
+$gsccp-theme: mat-light-theme($gsccp-palette-primary, $gsccp-palette-accent);
+
+@include angular-material-theme($gsccp-theme);
+
+
+
+.mat.expansion-panel:hover {
+  background-color:#476065;
+}
+
+.mat-expansion-panel-header {
+  background-color:#476065;
+}
+
+mat-expansion-panel-header:hover {
+  background-color:#476065;
+}
+
+mat-expansion-panel-header:focus {
+  background-color:#476065;
+}
+
+mat-expansion-panel-header:active {
+  background-color:#476065;
+}
+
+mat-panel-title, mat-panel-description {
+  color:white !important;
+}
+
+mat-expansion-panel-header.mat-expanded {
+  background-color:#476065;
+}
+
+mat-expansion-panel-header.mat-expansion-panel-header:hover {
+  background-color:#476065;
+}
+mat-expansion-panel-header.mat-expansion-panel-header:focus {
+  background-color:#476065;
+}
+mat-expansion-panel-header.mat-expansion-panel-header:active {
+  background-color:#476065;
+}
+
+mat-expansion-panel-header.mat-expanded:hover {
+  background-color:#476065;
+}
+mat-expansion-panel-header.mat-expanded:focus {
+  background-color:#476065;
+}
+mat-expansion-panel-header.mat-expanded:active {
+  background-color:#476065;
+}

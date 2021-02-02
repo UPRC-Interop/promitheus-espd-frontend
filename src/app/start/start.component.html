@@ -1,0 +1,322 @@
+<!--
+
+    Copyright 2016-2020 University of Piraeus Research Center
+    <p>
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    <p>
+        http://www.apache.org/licenses/LICENSE-2.0
+    <p>
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<app-welcome></app-welcome>
+<form  #form="ngForm">
+
+  <mat-card>
+    <mat-card-title translate>espd.init.who.are.you</mat-card-title>
+    <mat-card-content>
+      <mat-radio-group name="chooseRole" ngModel>
+        <mat-radio-button color="primary" name="role" value="CA" (change)="handleRole(CA)" #CA>{{'espd.init.i.am.ca' | translate}}
+        </mat-radio-button>
+        <mat-radio-button color="primary" name="role" value="CE" (change)="handleRole(CE)" #CE>{{'espd.init.i.am.ce' | translate}}
+        </mat-radio-button>
+        <mat-radio-button color="primary" name="role" value="EO" (change)="handleRole(EO)" #EO translate>{{'espd.init.i.am.eop' | translate}}
+        </mat-radio-button>
+      </mat-radio-group>
+    </mat-card-content>
+  </mat-card>
+  <mat-card *ngIf="isCA">
+    <mat-card-title translate>espd.init.what.you.do</mat-card-title>
+    <mat-card-content>
+      <div class="wrapper">
+        <!--<mat-form-field class="width">-->
+        <!--<input matInput name="noticeNumber" placeholder="{{'espd.init.ted.reception.id.placeholder' | translate}}" required ngModel>-->
+        <!--</mat-form-field>-->
+        <mat-radio-group name="caOptions" ngModel>
+          <mat-radio-button color="primary"
+                            name="caOption"
+                            value="createNewESPD"
+                            (change)="handleCASelection(createNewESPD)"
+                            #createNewESPD>{{ 'espd.init.create.espd' | translate}}</mat-radio-button>
+          <mat-radio-button color="primary"
+                            name="caOption"
+                            value="reuseESPD"
+                            (change)="handleCASelection(reuseESPD)" translate
+                            #reuseESPD>{{'espd.init.reuse.espd' | translate}}</mat-radio-button>
+          <mat-radio-button color="primary"
+                            name="caOption"
+                            value="reviewESPD"
+                            (change)="handleCASelection(reviewESPD)" translate
+                            #reviewESPD>{{'espd.init.review.espd' | translate}}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card *ngIf="isCE">
+    <mat-card-title translate>espd.init.what.you.do</mat-card-title>
+    <mat-card-content>
+      <div class="wrapper">
+        <!--<mat-form-field class="width">-->
+        <!--<input matInput name="noticeNumber" placeholder="{{'espd.init.ted.reception.id.placeholder' | translate}}" required ngModel>-->
+        <!--</mat-form-field>-->
+        <mat-radio-group name="caOptions" ngModel>
+          <mat-radio-button color="primary"
+                            name="caOption"
+                            value="createNewESPD"
+                            (change)="handleCESelection(createNewESPD)"
+                            #createNewESPD>{{ 'espd.init.create.espd' | translate}}</mat-radio-button>
+          <mat-radio-button color="primary"
+                            name="caOption"
+                            value="reuseESPD"
+                            (change)="handleCESelection(reuseESPD)" translate
+                            #reuseESPD>{{'espd.init.reuse.espd' | translate}}</mat-radio-button>
+          <mat-radio-button color="primary"
+                            name="caOption"
+                            value="reviewESPD"
+                            (change)="handleCESelection(reviewESPD)" translate
+                            #reviewESPD>{{'espd.init.review.espd' | translate}}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card *ngIf="isCreateNewESPD && isCA">
+    <!-- SELF-CONTAINED: select whether the document is REGULATED or SELF-CONTAINED -->
+    <mat-card-title>{{'espd.init.reg.or.self' | translate}}</mat-card-title>
+    <mat-card-content>
+      <mat-radio-group name="qaTypes" ngModel>
+        <mat-radio-button color="primary"
+                          name="qualificationApplicationType"
+                          value="REGULATED"
+                          (change)="handleQATypeSelection(createRegulated)"
+                          #createRegulated>{{'espd.init.create.requlated' | translate}}
+        </mat-radio-button>
+        <mat-radio-button color="primary"
+                          name="qualificationApplicationType"
+                          value="SELF-CONTAINED"
+                          (change)="handleQATypeSelection(createSelfContained)"
+                          #createSelfContained>{{'espd.init.create.selfcontained' | translate}}
+        </mat-radio-button>
+      </mat-radio-group>
+    </mat-card-content>
+
+    <!-- REGULATED: You can choose the version only if the qualificationApplication type is REGULATED -->
+<!--    <div class="version" *ngIf="utilities.qualificationApplicationType === 'regulated'">-->
+<!--      <mat-card-title>{{'espd.select.version' | translate}}</mat-card-title>-->
+<!--      <mat-card-content>-->
+<!--        <mat-radio-group name="versions" ngModel>-->
+<!--          <mat-radio-button color="primary"-->
+<!--                            name="version"-->
+<!--                            value="v1"-->
+<!--                            (change)="handleVersionSelection(createV1)"-->
+<!--                            #createV1>{{'espd.init.create.v1' | translate}}-->
+<!--          </mat-radio-button>-->
+<!--          <mat-radio-button color="primary"-->
+<!--                            name="version"-->
+<!--                            value="v2"-->
+<!--                            (change)="handleVersionSelection(createV2)"-->
+<!--                            #createV2>{{'espd.create.v2' | translate}}-->
+<!--          </mat-radio-button>-->
+<!--        </mat-radio-group>-->
+<!--      </mat-card-content>-->
+<!--    </div>-->
+
+    <mat-card-title translate>espd.init.where.are.you.from.ca</mat-card-title>
+    <mat-card-content>
+      <mat-form-field>
+        <mat-select name="CACountry" placeholder="{{'espd.init.select.country' | translate}}" ngModel (selectionChange)="CountrySelection($event)">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let country of codelist.countries" [value]="country.code">{{country.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card *ngIf="(isReuseESPD || isReviewESPD)&& isCA">
+    <mat-card-title translate>espd.init.upload.document</mat-card-title>
+    <mat-card-content>
+      <label for="fileUploadCA" translate>espd.init.upload.request.response</label>
+      <br>
+      <input type="file" id="fileUploadCA"
+             name="importCA"
+             (change)="handleFileUpload($event.target.files)" required
+             accept=".xml">
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card *ngIf="isCreateNewESPD && isCE">
+    <!-- SELF-CONTAINED: select whether the document is REGULATED or SELF-CONTAINED -->
+    <mat-card-title>{{'espd.init.reg.or.self' | translate}}</mat-card-title>
+    <mat-card-content>
+      <mat-radio-group name="qaTypes" ngModel>
+        <mat-radio-button color="primary"
+                          name="qualificationApplicationType"
+                          value="REGULATED"
+                          (change)="handleQATypeSelection(createRegulated)"
+                          #createRegulated>{{'espd.init.create.requlated' | translate}}
+        </mat-radio-button>
+        <mat-radio-button color="primary"
+                          name="qualificationApplicationType"
+                          value="SELF-CONTAINED"
+                          (change)="handleQATypeSelection(createSelfContained)"
+                          #createSelfContained>{{'espd.init.create.selfcontained' | translate}}
+        </mat-radio-button>
+      </mat-radio-group>
+    </mat-card-content>
+
+    <!-- REGULATED: You can choose the version only if the qualificationApplication type is REGULATED -->
+<!--    <div class="version" *ngIf="utilities.qualificationApplicationType === 'regulated'">-->
+<!--      <mat-card-title>{{'espd.select.version' | translate}}</mat-card-title>-->
+<!--      <mat-card-content>-->
+<!--        <mat-radio-group name="versions" ngModel>-->
+<!--          <mat-radio-button color="primary"-->
+<!--                            name="version"-->
+<!--                            value="v1"-->
+<!--                            (change)="handleVersionSelection(createV1)"-->
+<!--                            #createV1>{{'espd.init.create.v1' | translate}}-->
+<!--          </mat-radio-button>-->
+<!--          <mat-radio-button color="primary"-->
+<!--                            name="version"-->
+<!--                            value="v2"-->
+<!--                            (change)="handleVersionSelection(createV2)"-->
+<!--                            #createV2>{{'espd.create.v2' | translate}}-->
+<!--          </mat-radio-button>-->
+<!--        </mat-radio-group>-->
+<!--      </mat-card-content>-->
+<!--    </div>-->
+
+    <mat-card-title translate>espd.init.where.are.you.from.ca</mat-card-title>
+    <mat-card-content>
+      <mat-form-field>
+        <mat-select name="CACountry" placeholder="{{'espd.init.select.country' | translate}}" ngModel (selectionChange)="CountrySelection($event)">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let country of codelist.countries" [value]="country.code">{{country.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card *ngIf="(isReuseESPD || isReviewESPD)&& isCE">
+    <mat-card-title translate>espd.init.upload.document</mat-card-title>
+    <mat-card-content>
+      <label for="fileUploadCA" translate>espd.init.upload.request.response</label>
+      <br>
+      <input type="file" id="fileUploadCE"
+             name="importCE"
+             (change)="handleFileUpload($event.target.files)" required
+             accept=".xml">
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card *ngIf="isEO">
+    <mat-card-title translate>espd.init.what.you.do</mat-card-title>
+    <mat-card-content>
+      <mat-radio-group name="eoOptions" ngModel>
+        <mat-radio-button color="primary"
+                          name="eoOption"
+                          value="createResponse"
+                          (change)="handleEOSelection(createResponse)" #createResponse>{{'espd.init.create.response' | translate}}
+        </mat-radio-button>
+        <mat-radio-button color="primary"
+                          name="eoOption"
+                          value="importESPD"
+                          (change)="handleEOSelection(importESPD)" #importESPD>{{'espd.init.import.espd' | translate}}
+        </mat-radio-button>
+        <mat-radio-button color="primary"
+                          name="eoOption"
+                          value="reviewESPD"
+                          (change)="handleEOSelection(reviewESPD)"
+                          #reviewESPD>{{'espd.init.review.espd' | translate}}
+        </mat-radio-button>
+      </mat-radio-group>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card *ngIf="(isImportESPD || isReviewESPD) && isEO">
+    <mat-card-title translate>espd.init.upload.document</mat-card-title>
+    <mat-card-content>
+      <label for="fileUploadEO" translate>espd.init.upload.request.response</label>
+      <br>
+      <input type="file" id="fileUploadEO"
+             name="importEO"
+             (change)="handleFileUpload($event.target.files)" required
+             accept=".xml">
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card *ngIf="isCreateResponse && isEO">
+    <!-- SELF-CONTAINED: select whether the document is REGULATED or SELF-CONTAINED -->
+    <mat-card-title>{{'espd.init.reg.or.self' | translate}}</mat-card-title>
+    <mat-card-content>
+      <mat-radio-group name="qaTypes" ngModel>
+        <mat-radio-button color="primary"
+                          name="qualificationApplicationType"
+                          value="REGULATED"
+                          (change)="handleQATypeSelection(createRegulated)"
+                          #createRegulated>{{'espd.init.create.requlated' | translate}}
+        </mat-radio-button>
+        <mat-radio-button color="primary"
+                          name="qualificationApplicationType"
+                          value="SELF-CONTAINED"
+                          (change)="handleQATypeSelection(createSelfContained)"
+                          #createSelfContained>{{'espd.init.create.selfcontained' | translate}}
+        </mat-radio-button>
+      </mat-radio-group>
+    </mat-card-content>
+
+    <!-- REGULATED: You can choose the version only if the qualificationApplication type is REGULATED -->
+<!--    <div class="version" *ngIf="utilities.qualificationApplicationType === 'regulated'">-->
+<!--      <mat-card-title>{{'espd.select.version' | translate}}</mat-card-title>-->
+<!--      <mat-card-content>-->
+<!--        <mat-radio-group name="versions" ngModel>-->
+<!--          <mat-radio-button color="primary"-->
+<!--                            name="version"-->
+<!--                            value="v1"-->
+<!--                            (change)="handleVersionSelection(createV1)"-->
+<!--                            #createV1>{{'espd.init.create.v1' | translate}}-->
+<!--          </mat-radio-button>-->
+<!--          <mat-radio-button color="primary"-->
+<!--                            name="version"-->
+<!--                            value="v2"-->
+<!--                            (change)="handleVersionSelection(createV2)"-->
+<!--                            #createV2>{{'espd.create.v2' | translate}}-->
+<!--          </mat-radio-button>-->
+<!--        </mat-radio-group>-->
+<!--      </mat-card-content>-->
+<!--    </div>-->
+
+    <mat-card-title translate>espd.init.where.are.you.from.eo</mat-card-title>
+    <mat-card-content>
+      <mat-form-field>
+        <mat-select name="EOCountry" placeholder="{{'espd.init.select.country' | translate}}" ngModel (selectionChange)="CountrySelection($event)">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let country of codelist.countries" [value]="country.code">{{country.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+
+  <ng-container *ngIf="utilities.isStarted">
+    <mat-card class="reset">
+      <mat-card-content>
+        <p>{{'espd.init.dataloss.warning' | translate}}</p>
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
+
+  <button [disabled]="isNextDisabled()" type="button" mat-raised-button color="primary" (click)="onStartSubmit(form)">{{'espd.gui.next' | translate}}</button>
+  <ngx-loading [show]="isLoading" [config]="{ backdropBorderRadius: '3px', fullScreenBackdrop: true }"></ngx-loading>
+</form>
+
+
+
+
