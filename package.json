@@ -6,6 +6,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --prod",
+    "build-azure" : "ng build --configuration=azure",
+    "build-azure-stage" : "ng build --configuration=azurestage",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
