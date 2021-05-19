@@ -27,4 +27,4 @@ jobs:
       uses: azure/cli@v1.0.0
       with:
         inlineScript: |
-          az storage blob sync -c '$web' -s _output --connection-string '${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}'
+          az storage blob sync -c '$web' -s dist --connection-string '${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}'
