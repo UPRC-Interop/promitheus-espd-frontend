@@ -1,0 +1,30 @@
+name: Azure Static Web Apps CI/CD
+
+env:
+  NODE_VERSION: '12.x'                # set this to the node version to use
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build_and_deploy_job:
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    runs-on: ubuntu-latest
+    name: Build and Deploy Job
+    steps:
+    - uses: actions/checkout@master
+    - name: Use Node.js ${{ env.NODE_VERSION }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+    - name: npm install and build
+      run: |
+        npm install
+        npm run build-azure
+    - name: Update Blobs
+      uses: azure/cli@v1.0.0
+      with:
+        inlineScript: |
+          az storage blob sync -c '$web' -s _output --connection-string '${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}'
