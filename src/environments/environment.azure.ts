@@ -16,5 +16,5 @@
 
 export const environment = {
   production: true,
-  apiUrl: 'https://espd.kdoul.me/api/'
+  apiUrl: 'https://espdint.uprc-interop.tech/api/'
 };
