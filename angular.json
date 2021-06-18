@@ -71,7 +71,7 @@
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
-              "subresourceIntegrity": true,
+              "subresourceIntegrity": false,
               "buildOptimizer": true,
               "fileReplacements": [
                 {
