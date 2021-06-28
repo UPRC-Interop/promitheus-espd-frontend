@@ -16,5 +16,5 @@
 
 export const environment = {
   production: true,
-  apiUrl: 'https://espdint.uprc-interop.tech/api/'
+  apiUrl: 'https://espd.eprocurement.gov.gr/api/'
 };
