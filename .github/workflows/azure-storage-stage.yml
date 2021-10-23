@@ -1,4 +1,4 @@
-name: Deploy to Azure Storage - Staging
+name: Deploy to Azure Storage - Stage
 
 env:
   NODE_VERSION: '12.x'                # set this to the node version to use
