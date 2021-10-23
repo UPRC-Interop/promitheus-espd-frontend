@@ -4,9 +4,12 @@ env:
   NODE_VERSION: '12.x'                # set this to the node version to use
 
 on:
-  push:
-    branches:
-      - master
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'     
+        required: true
+        default: 'warning'
 
 jobs:
   build_and_deploy_job:
