@@ -15,6 +15,6 @@
 ///
 
 export const environment = {
-  production: true,
-  apiUrl: 'https://espdint.uprc-interop.tech/api/'
+  production: false,
+  apiUrl: 'https://promitheus-espd-develop.azurewebsites.net/api/'
 };
