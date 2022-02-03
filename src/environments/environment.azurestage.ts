@@ -16,5 +16,5 @@
 
 export const environment = {
   production: true,
-  apiUrl: 'https://espd-designer-backend-win-stage.azurewebsites.net/api/'
+  apiUrl: 'https://espd-api-stage.eprocurement.gov.gr/api/'
 };
