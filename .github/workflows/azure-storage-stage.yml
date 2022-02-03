@@ -1,4 +1,4 @@
-name: Azure Static Web Apps CI/CD
+name: Staging - Deploy to Azure Storage
 
 env:
   NODE_VERSION: '12.x'                # set this to the node version to use
@@ -10,7 +10,6 @@ on:
         description: 'Log level'     
         required: true
         default: 'warning'
-
 jobs:
   build_and_deploy_job:
     runs-on: ubuntu-latest
@@ -24,9 +23,9 @@ jobs:
     - name: npm install and build
       run: |
         npm install
-        npm run build-azure
+        npm run build-azure-stage
     - name: Update Blobs
       uses: azure/cli@v1.0.0
       with:
         inlineScript: |
-          az storage blob sync -c '$web' -s dist --connection-string '${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}'
+          az storage blob sync -c '$web' -s dist --connection-string '${{ secrets.AZURE_STORAGE_CONNECTION_STRING_STAGE }}'
