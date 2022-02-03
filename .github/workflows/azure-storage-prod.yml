@@ -1,4 +1,4 @@
-name: Deploy to Azure Storage - Production
+name: Production - Deploy to Azure Storage
 
 env:
   NODE_VERSION: '12.x'                # set this to the node version to use
