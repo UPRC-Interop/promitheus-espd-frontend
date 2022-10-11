@@ -625,5 +625,6 @@
    "espd.part2.information.subcontractors.main": "Not relied on entities",
    "espd.part2.lots.concerned.main": "Lots the EO tenders to",
    "espd.part5.title.eo.declares.that.main": "Reduction of the number of qualified candidates",
-  "espd.part2.sme.indicator.hint": ""
+  "espd.part2.sme.indicator.hint": "",
+  "espd.init.selfcontained.indicator.hint": ""
 }

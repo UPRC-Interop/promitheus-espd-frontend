@@ -55,3 +55,6 @@
   font-weight: bold;
 }
 
+::ng-deep .tooltip-red {
+  background: #b71c1c !important;
+}
