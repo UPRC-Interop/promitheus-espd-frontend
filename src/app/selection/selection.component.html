@@ -255,7 +255,7 @@
             <mat-checkbox color="primary"
                           name='{{criteria.name+i}}'
                           [(ngModel)]="dataService.selectionCCriteria[i].selected"
-                          [disabled]="dataService.isReadOnly()">{{criteria.propertyKeyMap.pk1 | translate}}</mat-checkbox>
+                          [disabled]="dataService.isReadOnly() || (dataService.selectionCCriteria[i].compulsory)">{{criteria.propertyKeyMap.pk1 | translate}}</mat-checkbox>
             <div class="critDesc">{{criteria.propertyKeyMap.pk2 | translate}}</div>
           </div>
           <div class="eCertis">
