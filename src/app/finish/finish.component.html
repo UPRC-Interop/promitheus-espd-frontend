@@ -100,7 +100,7 @@
   <button mat-raised-button color="primary" matStepperPrevious [innerHTML]="'espd.gui.previous' | translate"></button>
   <ng-container *ngIf="!dataService.isReadOnly()">
     <button type="submit" mat-raised-button color="primary" matStepperNext (click)="exportXmlFile()">{{'espd.part5.export' | translate}} (XML)</button>
-    <button type="submit" mat-raised-button color="primary" matStepperNext (click)="exportHtmlFile()">{{'espd.part5.export' | translate}} (HTML)</button>
+<!--    <button type="submit" mat-raised-button color="primary" matStepperNext (click)="exportHtmlFile()">{{'espd.part5.export' | translate}} (HTML)</button>-->
     <button type="submit" mat-raised-button color="primary" matStepperNext (click)="exportPdfFile()">{{'espd.part5.export' | translate}} (PDF)</button>
     <ngx-loading [show]="utilities.isLoading" [config]="{ backdropBorderRadius: '3px', fullScreenBackdrop: true }"></ngx-loading>
   </ng-container>
