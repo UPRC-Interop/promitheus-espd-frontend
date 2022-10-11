@@ -169,14 +169,14 @@
                   [(ngModel)]="dataService.CADetails.procurementProcedureDesc"
                   [disabled]="dataService.isReadOnly()"></textarea>
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field matTooltip="{{'espd.part1.file.ref.ca.indicator.hint' | translate}}">
         <input matInput placeholder="{{'espd.part1.file.ref.ca' | translate}}" name="fileReferenceNumber"
                [(ngModel)]="dataService.CADetails.procurementProcedureFileReferenceNo"
                [disabled]="dataService.isReadOnly()">
       </mat-form-field>
       <!-- SELF-CONTAINED: Type of Procedure -->
       <div *ngIf="utilities.qualificationApplicationType === 'selfcontained'">
-        <mat-form-field>
+        <mat-form-field matTooltip="{{'espd.part1.file.ref.ca.indicator.hint' | translate}}">
           <mat-select placeholder="{{'espd.part1.info.procedure' | translate}}" name="typeOfProcedure"
                       [(ngModel)]="dataService.CADetails.procurementProcedureType" [disabled]="dataService.isReadOnly()">
             <mat-option>None</mat-option>
