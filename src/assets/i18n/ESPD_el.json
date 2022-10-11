@@ -457,7 +457,7 @@
    "espd.crit.number.fiscal.years": "Number of fiscal years",
    "espd.crit.business.domain.description": "Business domain description",
    "espd.crit.cpvs": "CPVs:",
-   "espd.crit.cpv.code": "Κωδικοί CPV",
+   "espd.crit.cpv.code": "Κωδικοί CPV - Να γίνει εξειδικευμένη αναφορά της συνεισφοράς/δραστηριότητας",
    "espd.crit.applicable.ratios": "Select the periods applicable for all ratios",
    "espd.crit.ratio.type": "Προσδιορισμός της απαιτούμενης αναλογίας (δείκτη)- αναλογία (δείκτης) μεταξύ x και y:",
    "espd.crit.definition": "Definition",
