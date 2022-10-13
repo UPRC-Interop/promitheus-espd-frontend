@@ -175,7 +175,7 @@
 
         </textarea>
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field matTooltip="{{'espd.part1.file.ref.ca.indicator.hint' | translate}}">
         <input matInput placeholder="{{'espd.part1.file.ref.ca' | translate}}" name="fileReferenceNumber"
                [(ngModel)]="dataService.CADetails.procurementProcedureFileReferenceNo" [disabled]="dataService.isReadOnly()">
       </mat-form-field>
