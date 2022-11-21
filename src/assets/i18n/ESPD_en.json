@@ -457,7 +457,7 @@
    "espd.crit.number.fiscal.years": "Number of fiscal years",
    "espd.crit.business.domain.description": "Business domain description",
    "espd.crit.cpvs": "CPVs:",
-   "espd.crit.cpv.code": "CPV Codes:",
+   "espd.crit.cpv.code": "CPV Codes - Please make specific reference to the contribution/activity",
    "espd.crit.applicable.ratios": "Select the periods applicable for all ratios",
    "espd.crit.ratio.type": "Ratio Type",
    "espd.crit.definition": "Definition",
