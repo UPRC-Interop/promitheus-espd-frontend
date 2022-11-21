@@ -29,7 +29,7 @@
    "espd.part1.name": "Official name:",
    "espd.part1.nat.regnum": "National registration number (if known):",
    "espd.part1.official.journal.alert": "In case publication of a notice in the Official Journal of the European Union is not required, please give other information allowing the procurement procedure to be unequivocally identified (e. g. reference of a publication at national level)",
-   "espd.part1.ojs.label": "Notice number in the OJS:",
+   "espd.part1.ojs.label": "Notice number in the OJS: [][][][]/S [][][]-[][][][][][]",
    "espd.part1.ojs.url": "OJS URL",
    "espd.part1.postcode": "Postcode:",
    "espd.part1.procurer.name": "Title:",
