@@ -34,7 +34,7 @@
    "espd.part1.postcode": "Postcode:",
    "espd.part1.procurer.name": "Title:",
    "espd.part1.street.and. num": "Street and number:",
-   "espd.part1.ted.reception.id": "Received notice number",
+   "espd.part1.ted.reception.id": "OJEU S number [], date [], page []",
    "espd.part1.telephone": "Telephone:",
    "espd.part1.title.or.short.desc": "Short description:",
    "espd.part1.to.be.filled.alert": "For procurement procedures in which a call for competition has been published in the Official Journal of the European Union, the information required under Part I will be automatically retrieved, provided that the electronic ESPD-service  is used to generate and fill in the ESPD. Reference of the relevant notice  published in the Official Journal of the European Union:",
