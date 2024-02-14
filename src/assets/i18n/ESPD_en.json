@@ -117,6 +117,7 @@
    "espd.crit.country.member.state": "Country or Member State concerned",
    "espd.crit.date": "Date",
    "espd.crit.date.of.conviction": "Date of conviction",
+   "espd.part3.crit.date.of.conviction.or.decision": "Date of conviction",
    "espd.part3.crit.eu.national.bankruptcy.title": "Please indicate the date of conviction or decision",
    "espd.crit.decision.final.and.binding": "If this breach of obligations was established through a judicial or administrative decision, was this decision final and binding?",
    "espd.crit.description": "Description",
