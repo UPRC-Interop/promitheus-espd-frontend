@@ -321,7 +321,7 @@
       <mat-form-field>
         <mat-select [formControlName]="req.uuid+'eoidtype'" [id]="req.uuid+'eoidtype'" placeholder="{{'espd.crit.type.id' | translate}}">
           <mat-option>None</mat-option>
-          <mat-option *ngFor="let type of codelist.eoIDType" [value]="type.code">{{type.code}} ( {{type.name}} )</mat-option>
+          <mat-option *ngFor="let type of codelist.eoIDType" [value]="type.code">{{type.name}}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
