@@ -21,7 +21,7 @@
     <mat-expansion-panel expanded="true">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          {{'espd.part1.info.pub' | translate}}
+          {{ 'espd.part1.info.pub' | translate }}
         </mat-panel-title>
         <mat-panel-description>
 
@@ -56,8 +56,8 @@
         </mat-error>
       </mat-form-field>
       <!--<mat-form-field>-->
-        <!--<input matInput name="nationalJournal" placeholder="National Official Journal"-->
-               <!--[(ngModel)]="dataService.CADetails.nationalOfficialJournal">-->
+      <!--<input matInput name="nationalJournal" placeholder="National Official Journal"-->
+      <!--[(ngModel)]="dataService.CADetails.nationalOfficialJournal">-->
       <!--</mat-form-field>-->
 
       <div class="desc">
@@ -67,7 +67,7 @@
     <mat-expansion-panel expanded="true">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          {{'espd.part1.contact.details.ca' | translate}}
+          {{ 'espd.part1.contact.details.ca' | translate }}
         </mat-panel-title>
         <mat-panel-description>
 
@@ -98,18 +98,22 @@
       </mat-form-field>
       <ng-container *ngIf="dataService.CADetails.postalAddress || dataService.PostalAddress">
         <mat-form-field>
-          <input matInput placeholder="{{'espd.part1.city' | translate}}" name="CAofficialCity" [(ngModel)]="dataService.PostalAddress.city" [disabled]="dataService.isReadOnly()">
+          <input matInput placeholder="{{'espd.part1.city' | translate}}" name="CAofficialCity"
+                 [(ngModel)]="dataService.PostalAddress.city" [disabled]="dataService.isReadOnly()">
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="{{'espd.part1.street.and. num' | translate}}" name="CAofficialStreet" [(ngModel)]="dataService.PostalAddress.addressLine1" [disabled]="dataService.isReadOnly()">
+          <input matInput placeholder="{{'espd.part1.street.and. num' | translate}}" name="CAofficialStreet"
+                 [(ngModel)]="dataService.PostalAddress.addressLine1" [disabled]="dataService.isReadOnly()">
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="{{'espd.part1.postcode' | translate}}" name="CAofficialPostCode" [(ngModel)]="dataService.PostalAddress.postCode" [disabled]="dataService.isReadOnly()">
+          <input matInput placeholder="{{'espd.part1.postcode' | translate}}" name="CAofficialPostCode"
+                 [(ngModel)]="dataService.PostalAddress.postCode" [disabled]="dataService.isReadOnly()">
         </mat-form-field>
       </ng-container>
       <ng-container *ngIf="dataService.CADetails.contactingDetails || dataService.ContactingDetails">
         <mat-form-field>
-          <input matInput placeholder="{{'espd.part1.contact.person' | translate}}" name="CAofficialContactName" [(ngModel)]="dataService.ContactingDetails.contactPointName" [disabled]="dataService.isReadOnly()">
+          <input matInput placeholder="{{'espd.part1.contact.person' | translate}}" name="CAofficialContactName"
+                 [(ngModel)]="dataService.ContactingDetails.contactPointName" [disabled]="dataService.isReadOnly()">
         </mat-form-field>
         <mat-form-field>
           <input matInput placeholder="{{'espd.part1.telephone' | translate}}" name="CAofficialContactTelephone"
@@ -137,9 +141,10 @@
         </mat-form-field>
       </ng-container>
       <mat-form-field>
-        <mat-select #caCountry="ngModel" name="CACountry" placeholder="{{'espd.part1.country' | translate}}" [(ngModel)]="dataService.selectedCountry" required [disabled]="dataService.isReadOnly()">
+        <mat-select #caCountry="ngModel" name="CACountry" placeholder="{{'espd.part1.country' | translate}}"
+                    [(ngModel)]="dataService.selectedCountry" required [disabled]="dataService.isReadOnly()">
           <mat-option>None</mat-option>
-          <mat-option *ngFor="let country of codelist.countries" [value]="country.code">{{country.name}}</mat-option>
+          <mat-option *ngFor="let country of codelist.countries" [value]="country.code">{{ country.name }}</mat-option>
         </mat-select>
         <mat-error *ngIf="caCountry.invalid">
           <input-validation-error
@@ -151,14 +156,15 @@
     <mat-expansion-panel expanded="true">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          {{'espd.part1.info.procurement.proc' | translate}}
+          {{ 'espd.part1.info.procurement.proc' | translate }}
         </mat-panel-title>
         <mat-panel-description>
 
         </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-form-field>
-        <input matInput placeholder="{{'espd.part1.procurer.name' | translate}}" name="title" [(ngModel)]="dataService.CADetails.procurementProcedureTitle" [disabled]="dataService.isReadOnly()">
+        <input matInput placeholder="{{'espd.part1.procurer.name' | translate}}" name="title"
+               [(ngModel)]="dataService.CADetails.procurementProcedureTitle" [disabled]="dataService.isReadOnly()">
       </mat-form-field>
       <mat-form-field>
         <!--<input matInput placeholder="Short Description">-->
@@ -178,9 +184,10 @@
       <div *ngIf="utilities.qualificationApplicationType === 'selfcontained'">
         <mat-form-field>
           <mat-select placeholder="{{'espd.part1.info.procedure' | translate}}" name="typeOfProcedure"
-                      [(ngModel)]="dataService.CADetails.procurementProcedureType" [disabled]="dataService.isReadOnly()">
+                      [(ngModel)]="dataService.CADetails.procurementProcedureType"
+                      [disabled]="dataService.isReadOnly()">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let proc of codelist.procedureTypes" [value]="proc.code">{{proc.name}}</mat-option>
+            <mat-option *ngFor="let proc of codelist.procedureTypes" [value]="proc.code">{{ proc.name }}</mat-option>
           </mat-select>
         </mat-form-field>
         <!-- SELF-CONTAINED: Bid Type - Object of Contracts -->
@@ -188,14 +195,16 @@
           <mat-select placeholder="{{'espd.part1.objects.of.contracts' | translate}} " name="projectType"
                       [(ngModel)]="dataService.CADetails.projectType" [disabled]="dataService.isReadOnly()">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let project of codelist.projectTypes" [value]="project.code">{{project.name}}</mat-option>
+            <mat-option *ngFor="let project of codelist.projectTypes" [value]="project.code">{{ project.name }}
+            </mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field class="cpv-chip-list">
           <mat-chip-list #chipList [disabled]="disabled">
-            <mat-chip color='primary' selected=true *ngFor="let cpv of dataService.CADetails.classificationCodes" [selectable]="selectable"
+            <mat-chip color='primary' selected=true *ngFor="let cpv of dataService.CADetails.classificationCodes"
+                      [selectable]="selectable"
                       [removable]="removable" (removed)="remove(cpv)">
-              {{cpv}}
+              {{ cpv }}
               <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
             </mat-chip>
             <input placeholder="{{'espd.crit.cpv.code' | translate}} "
@@ -216,20 +225,22 @@
       <mat-expansion-panel expanded="true">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            {{'espd.part2.info.eo' | translate}}
+            {{ 'espd.part2.info.eo' | translate }}
           </mat-panel-title>
         </mat-expansion-panel-header>
         <div class="eoContainer">
           <div class="eo1">
             <mat-form-field class="eoField">
-              <input formControlName="name" matInput placeholder="{{'espd.part2.name' | translate}}" required >
+              <input formControlName="name" matInput placeholder="{{'espd.part2.name' | translate}}" required>
               <mat-error *ngIf="dataService.EOForm.get('name').invalid">
-                <input-validation-error [formControlErrors]="dataService.EOForm.get('name').errors"></input-validation-error>
+                <input-validation-error
+                  [formControlErrors]="dataService.EOForm.get('name').errors"></input-validation-error>
               </mat-error>
             </mat-form-field>
             <div class="postalAddress" formGroupName='postalAddress'>
               <mat-form-field class="eoField">
-                <input formControlName="addressLine1" matInput placeholder="{{'espd.part1.street.and. num' | translate}}">
+                <input formControlName="addressLine1" matInput
+                       placeholder="{{'espd.part1.street.and. num' | translate}}">
               </mat-form-field>
               <mat-form-field class="eoField">
                 <input formControlName="postCode" matInput placeholder="{{'espd.part1.postcode' | translate}}">
@@ -241,7 +252,8 @@
                 <mat-select formControlName="countryCode"
                             placeholder="{{'espd.part1.country' | translate}}" required>
                   <mat-option>None</mat-option>
-                  <mat-option *ngFor="let country of codelist.countries" [value]="country.code">{{country.name}}</mat-option>
+                  <mat-option *ngFor="let country of codelist.countries" [value]="country.code">{{ country.name }}
+                  </mat-option>
                   <mat-error *ngIf="dataService.EOForm.get('postalAddress.countryCode').invalid">
                     <input-validation-error
                       [formControlErrors]="dataService.EOForm.get('postalAddress.countryCode').errors"></input-validation-error>
@@ -253,7 +265,8 @@
             <mat-form-field class="eoField">
               <input formControlName="id" matInput placeholder="{{'espd.part2.vat' | translate}}" vatNumber>
               <mat-error *ngIf="dataService.EOForm.get('id').invalid">
-                <input-validation-error [formControlErrors]="dataService.EOForm.get('id').errors"></input-validation-error>
+                <input-validation-error
+                  [formControlErrors]="dataService.EOForm.get('id').errors"></input-validation-error>
               </mat-error>
             </mat-form-field>
             <!-- REGULATED 2.1.0: Removed field due to redundancy. Now the 2.1.0 taxonomy provides CRITERION.OTHER.EO_DATA.LOTS_TENDERED criterion -->
@@ -268,7 +281,7 @@
                 <mat-select formControlName="eoRole"
                             placeholder="{{'espd.part2.role' | translate}}">
                   <mat-option>None</mat-option>
-                  <mat-option *ngFor="let role of codelist.eoRoleTypes" [value]="role.code">{{role.name}}</mat-option>
+                  <mat-option *ngFor="let role of codelist.eoRoleTypes" [value]="role.code">{{ role.name }}</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
@@ -298,7 +311,8 @@
                 </mat-error>
               </mat-form-field>
               <mat-form-field class="eoField">
-                <input formControlName="contactPointName" matInput placeholder="{{'espd.part2.contact.person' | translate}}">
+                <input formControlName="contactPointName" matInput
+                       placeholder="{{'espd.part2.contact.person' | translate}}">
               </mat-form-field>
             </div>
             <!--<mat-form-field class="eoField">-->
@@ -307,47 +321,59 @@
             <mat-form-field class="eoField">
               <input formControlName="webSiteURI" matInput placeholder="{{'espd.part1.website' | translate}}">
               <mat-error *ngIf="dataService.EOForm.get('webSiteURI').invalid">
-                <input-validation-error [formControlErrors]="dataService.EOForm.get('webSiteURI').errors"></input-validation-error>
+                <input-validation-error
+                  [formControlErrors]="dataService.EOForm.get('webSiteURI').errors"></input-validation-error>
               </mat-error>
             </mat-form-field>
           </div>
         </div>
-        <div class="smeIndicator" matTooltip="{{'espd.part2.sme.indicator.hint' | translate}}">
-          <span translate>espd.part2.is.eo.sized</span>
-          <mat-radio-group formControlName="smeIndicator">
-            <mat-radio-button color="primary"
-                              value="true"
-                              [value]="true">{{'espd.gui.yes' | translate}}
-            </mat-radio-button>
-            <mat-radio-button color="primary"
-                              value="false"
-                              [value]="false" [checked]="true">{{'espd.gui.no' | translate}}
-            </mat-radio-button>
-          </mat-radio-group>
-        </div>
-        <div *ngIf="utilities.qualificationApplicationType === 'selfcontained'">
-          <mat-form-field>
-            <input formControlName="employeeQuantity" matInput placeholder="{{'espd.part2.number.employees' | translate}}">
-          </mat-form-field>
-          <div class="generalTurnover" formGroupName="generalTurnover">
-            <mat-form-field>
-              <input formControlName="amount" matInput placeholder="{{'espd.part2.turnover' | translate}}">
-            </mat-form-field>
-            <mat-form-field>
-              <mat-select formControlName="currency" matInput placeholder="{{'espd.part2.currency' | translate}}">
-                <mat-option>None</mat-option>
-                <mat-option *ngFor="let curr of codelist.currency" [value]="curr.code">{{curr.code}} ( {{curr.name}} )</mat-option>
-              </mat-select>
-            </mat-form-field>
+        <mat-card>
+          <div class="smeIndicator" matTooltip="{{'espd.part2.sme.indicator.hint' | translate}}">
+            <b><span translate>espd.part2.is.eo.sized</span></b>
+            <mat-card class="smeCard">
+              <p><b>{{'espd.crit.your.answer' | translate}}</b></p>
+              <mat-radio-group formControlName="smeIndicator">
+                <mat-radio-button color="primary"
+                                  value="true"
+                                  [value]="true">{{ 'espd.gui.yes' | translate }}
+                </mat-radio-button>
+                <mat-radio-button color="primary"
+                                  value="false"
+                                  [value]="false" [checked]="true">{{ 'espd.gui.no' | translate }}
+                </mat-radio-button>
+              </mat-radio-group>
+              <div *ngIf="utilities.qualificationApplicationType === 'selfcontained'">
+                <mat-card class="smeCard">
+                  <mat-form-field>
+                    <input formControlName="employeeQuantity" matInput
+                           placeholder="{{'espd.part2.number.employees' | translate}}">
+                  </mat-form-field>
+                  <div class="generalTurnover" formGroupName="generalTurnover">
+                    <mat-form-field>
+                      <input formControlName="amount" matInput placeholder="{{'espd.part2.turnover' | translate}}">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <mat-select formControlName="currency" matInput placeholder="{{'espd.part2.currency' | translate}}">
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let curr of codelist.currency" [value]="curr.code">{{ curr.code }}
+                          ( {{ curr.name }} )
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </mat-card>
+              </div>
+            </mat-card>
           </div>
-        </div>
+        </mat-card>
         <ng-container *ngIf="dataService.eoRelatedACriteriaForm">
           <form [formGroup]="dataService.eoRelatedACriteriaForm" #form="ngForm">
             <div class="eoRelatedCriteria" *ngFor="let cr of dataService.eoRelatedACriteria; let i=index">
               <mat-card>
-                <h4>{{cr.propertyKeyMap.pk2 | translate}}</h4>
+                <h4>{{ cr.propertyKeyMap.pk2 | translate }}</h4>
                 <div class="answer">
-                  <app-criterion [criterion]="cr" [form]="dataService.eoRelatedACriteriaForm.controls" [indicator]="true"></app-criterion>
+                  <app-criterion [criterion]="cr" [form]="dataService.eoRelatedACriteriaForm.controls"
+                                 [indicator]="true"></app-criterion>
                 </div>
               </mat-card>
             </div>
@@ -358,9 +384,10 @@
           <form [formGroup]="dataService.eoLotCriterionForm">
             <div class="eoRelatedCriteria" *ngFor="let cr of dataService.eoLotCriterion; let i=index">
               <mat-card>
-                <h4>{{cr.propertyKeyMap.pk2 | translate}}</h4>
+                <h4>{{ cr.propertyKeyMap.pk2 | translate }}</h4>
                 <div class="answer">
-                  <app-criterion [criterion]="cr" [form]="dataService.eoLotCriterionForm.controls" [indicator]="true"></app-criterion>
+                  <app-criterion [criterion]="cr" [form]="dataService.eoLotCriterionForm.controls"
+                                 [indicator]="true"></app-criterion>
                 </div>
               </mat-card>
             </div>
@@ -374,7 +401,7 @@
           <mat-expansion-panel expanded="true" [disabled]="true">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                  {{'espd.part2.info.respresent' | translate}} #{{ i + 1}}
+                {{ 'espd.part2.info.respresent' | translate }} #{{ i + 1 }}
               </mat-panel-title>
               <div class="card-btn-container" *ngIf="!dataService.isReadOnly()">
                 <div class="add">
@@ -390,9 +417,11 @@
               <div class="eoContainer">
                 <div class="eo1">
                   <mat-form-field class="eoField">
-                    <input formControlName="firstName" matInput placeholder="{{'espd.part2.first.name' | translate}}" required>
+                    <input formControlName="firstName" matInput placeholder="{{'espd.part2.first.name' | translate}}"
+                           required>
                     <mat-error *ngIf="getNaturalPersonFormData().at(i).get('firstName').invalid">
-                      <input-validation-error [formControlErrors]="getNaturalPersonFormData().at(i).get('firstName').errors"></input-validation-error>
+                      <input-validation-error
+                        [formControlErrors]="getNaturalPersonFormData().at(i).get('firstName').errors"></input-validation-error>
                     </mat-error>
                   </mat-form-field>
                   <mat-form-field class="eoField">
@@ -400,14 +429,16 @@
                            formControlName="birthDate" matInput placeholder="{{'espd.part2.birth.date' | translate}}"
                            [matDatepicker]="picker" required #birthDate>
                     <mat-error *ngIf="getNaturalPersonFormData().at(i).get('birthDate').invalid">
-                      <input-validation-error [formControlErrors]="getNaturalPersonFormData().at(i).get('birthDate').errors"></input-validation-error>
+                      <input-validation-error
+                        [formControlErrors]="getNaturalPersonFormData().at(i).get('birthDate').errors"></input-validation-error>
                     </mat-error>
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                   </mat-form-field>
                   <div class="postalAddress" formGroupName='postalAddress'>
                     <mat-form-field class="eoField">
-                      <input formControlName="addressLine1" matInput placeholder="{{'espd.part1.street.and. num' | translate}}">
+                      <input formControlName="addressLine1" matInput
+                             placeholder="{{'espd.part1.street.and. num' | translate}}">
                     </mat-form-field>
                     <mat-form-field class="eoField">
                       <input formControlName="postCode" matInput placeholder="{{'espd.part1.postcode' | translate}}">
@@ -416,10 +447,12 @@
                       <input matInput placeholder="{{'espd.part1.city' | translate}}" formControlName="city">
                     </mat-form-field>
                     <mat-form-field class="eoField">
-                      <mat-select  formControlName="countryCode"
+                      <mat-select formControlName="countryCode"
                                   placeholder="{{'espd.part1.country' | translate}}" required>
                         <mat-option>None</mat-option>
-                        <mat-option *ngFor="let country of codelist.countries" [value]="country.code">{{country.name}}</mat-option>
+                        <mat-option *ngFor="let country of codelist.countries"
+                                    [value]="country.code">{{ country.name }}
+                        </mat-option>
                       </mat-select>
                       <mat-error *ngIf="getNaturalPersonFormData().at(i).get('postalAddress.countryCode').invalid">
                         <input-validation-error
@@ -430,9 +463,11 @@
                 </div>
                 <div class="eo2">
                   <mat-form-field class="eoField">
-                    <input formControlName="familyName" matInput placeholder="{{'espd.part2.last.name' | translate}}" required>
+                    <input formControlName="familyName" matInput placeholder="{{'espd.part2.last.name' | translate}}"
+                           required>
                     <mat-error *ngIf="getNaturalPersonFormData().at(i).get('familyName').invalid">
-                      <input-validation-error [formControlErrors]="getNaturalPersonFormData().at(i).get('familyName').errors"></input-validation-error>
+                      <input-validation-error
+                        [formControlErrors]="getNaturalPersonFormData().at(i).get('familyName').errors"></input-validation-error>
                     </mat-error>
                   </mat-form-field>
                   <mat-form-field class="eoField">
@@ -461,7 +496,8 @@
                     </mat-form-field>
                   </div>
                   <mat-form-field class="eoField">
-                    <input formControlName="role" matInput placeholder="{{'espd.part2.pos.act.in.capacity' | translate}}">
+                    <input formControlName="role" matInput
+                           placeholder="{{'espd.part2.pos.act.in.capacity' | translate}}">
                   </mat-form-field>
                 </div>
               </div>
@@ -473,15 +509,16 @@
       <mat-expansion-panel expanded="true">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            {{'espd.part2.info.reliance' | translate}}
+            {{ 'espd.part2.info.reliance' | translate }}
           </mat-panel-title>
         </mat-expansion-panel-header>
         <ng-container *ngIf='dataService.eoRelatedCCriteriaForm!=null'>
           <form [formGroup]="dataService.eoRelatedCCriteriaForm" #form="ngForm">
             <div class="eoRelatedCriteria" *ngFor="let cr of dataService.eoRelatedCCriteria; let i=index">
-              <span>{{cr.propertyKeyMap.pk2 | translate}}</span>
+              <span>{{ cr.propertyKeyMap.pk2 | translate }}</span>
               <div class="answer">
-                <app-criterion [criterion]="cr" [form]="dataService.eoRelatedCCriteriaForm.controls" [indicator]="true"></app-criterion>
+                <app-criterion [criterion]="cr" [form]="dataService.eoRelatedCCriteriaForm.controls"
+                               [indicator]="true"></app-criterion>
               </div>
             </div>
           </form>
@@ -490,15 +527,16 @@
       <mat-expansion-panel expanded="true">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            {{'espd.part2.information.subcontractors' | translate}}
+            {{ 'espd.part2.information.subcontractors' | translate }}
           </mat-panel-title>
         </mat-expansion-panel-header>
         <ng-container *ngIf='dataService.eoRelatedDCriteriaForm!=null'>
           <form [formGroup]="dataService.eoRelatedDCriteriaForm" #form="ngForm">
             <div class="eoRelatedCriteria" *ngFor="let cr of dataService.eoRelatedDCriteria; let i=index">
-              <span>{{cr.propertyKeyMap.pk2 | translate}}</span>
+              <span>{{ cr.propertyKeyMap.pk2 | translate }}</span>
               <div class="answer">
-                <app-criterion [criterion]="cr" [form]="dataService.eoRelatedDCriteriaForm.controls" [indicator]="true"></app-criterion>
+                <app-criterion [criterion]="cr" [form]="dataService.eoRelatedDCriteriaForm.controls"
+                               [indicator]="true"></app-criterion>
               </div>
             </div>
           </form>
@@ -508,7 +546,8 @@
   </form>
 
 
-  <button mat-raised-button color="primary" matStepperPrevious>{{'espd.gui.previous' | translate}}</button>
-  <button type="button" mat-raised-button color="primary" matStepperNext (click)="onProcedureEOSubmit( form, dataService.EOForm)">{{'espd.gui.next' | translate}}
+  <button mat-raised-button color="primary" matStepperPrevious>{{ 'espd.gui.previous' | translate }}</button>
+  <button type="button" mat-raised-button color="primary" matStepperNext
+          (click)="onProcedureEOSubmit( form, dataService.EOForm)">{{ 'espd.gui.next' | translate }}
   </button>
 </form>

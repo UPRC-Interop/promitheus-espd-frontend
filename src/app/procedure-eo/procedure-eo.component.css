@@ -65,6 +65,14 @@ mat-card {
   border:1px solid rgba(0,0,0,0.1);
 }
 
+.mat-radio-button {
+  padding: 5px;
+}
+
+.smeCard {
+  margin-top: 20px;
+}
+
 mat-expansion-panel-header:hover {
   background-color:#476065;
 }
