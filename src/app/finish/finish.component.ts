@@ -67,4 +67,9 @@ export class FinishComponent implements OnInit, BaseStep {
   public areFormsValid(): boolean {
     return this.validationService.validateFormsInComponent(this.forms);
   }
+
+  isExportPossible(): boolean {
+    return this.startStepValid && this.procedureStepValid && this.exclusionStepValid && this.selectionStepValid
+      && this.finishStepValid;
+  }
 }
