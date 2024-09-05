@@ -14,7 +14,7 @@
 /// limitations under the License.
 ///
 
-import {Component, Input, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {AfterViewChecked, AfterViewInit, Component, Input, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {FormGroup, NgForm} from '@angular/forms';
 import {FormUtilService} from '../services/form-util.service';
@@ -30,12 +30,12 @@ import {ApicallService} from '../services/apicall.service';
   templateUrl: './finish-eo.component.html',
   styleUrls: ['./finish-eo.component.css']
 })
-export class FinishEoComponent implements OnInit, BaseStep {
+export class FinishEoComponent implements OnInit, BaseStep, AfterViewChecked {
 
   @ViewChildren('form') forms: QueryList<NgForm>;
   @ViewChild('dateInput') dateInput: NgForm;
 
-  @Input() form: FormGroup;
+  // @Input() form: FormGroup;
   @Input() startStepValid: boolean;
   @Input() procedureStepValid: boolean;
   @Input() exclusionStepValid: boolean;
@@ -54,6 +54,15 @@ export class FinishEoComponent implements OnInit, BaseStep {
 
   ngOnInit() {
 
+  }
+
+
+  ngAfterViewChecked() {
+    this.forms.forEach((form: NgForm) => {
+      form.form.valueChanges.subscribe((value) => {
+        this.finishStepValid = this.areFormsValid();
+      });
+    });
   }
 
   onHtmlExport() {

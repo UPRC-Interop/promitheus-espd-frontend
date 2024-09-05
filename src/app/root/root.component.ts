@@ -57,7 +57,7 @@ export class RootComponent implements OnInit, OnChanges, AfterViewInit {
   finishStepValid: boolean;
 
   isLinear = true;
-  elTitle = 'Π�?ομηθε�?ς ESPDint – ηλεκτ�?ονική υπη�?εσία σ�?νταξης του Ενιαίου Ευ�?ωπα�?κο�? Εγγ�?άφου Σ�?μβασης (ΕΕΕΣ)';
+  elTitle = 'Π�?ομηθε�?ς ESPDint – ηλεκτ�?ονική υπη�?εσία σ�?νταξης του Ενιαίου Ευ�?ωπα�?κο�? Εγγ�?άφου Σ�?μβασης (ΕΕΕΣ)';
   enTitle = 'Promitheus ESPDint – e-Service to fill out the European Single Procurement Document (ESPD)';
 
 
@@ -105,9 +105,7 @@ export class RootComponent implements OnInit, OnChanges, AfterViewInit {
     this.procedureStepValid = event.selectedIndex === WizardSteps.PROCEDURE || RootComponent.isComponentValid(isCA ? this.procedureCaComponent : this.procedureEoComponent);
     this.exclusionStepValid = event.selectedIndex === WizardSteps.EXCLUSION || RootComponent.isComponentValid(isCA ? this.exclusionCaComponent : this.exclusionEoComponent);
     this.selectionStepValid = event.selectedIndex === WizardSteps.SELECTION || RootComponent.isComponentValid(isCA ? this.selectionCaComponent : this.selectionEoComponent);
-    this.finishStepValid = event.selectedIndex === WizardSteps.FINISH || RootComponent.isComponentValid(isCA ? this.finishCaComponent : this.finishEoComponent);
-
-
+    this.finishStepValid =  RootComponent.isComponentValid(isCA ? this.finishCaComponent : this.finishEoComponent);
   }
 
   changeURL() {
