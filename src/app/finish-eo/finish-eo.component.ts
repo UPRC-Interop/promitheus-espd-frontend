@@ -93,7 +93,6 @@ export class FinishEoComponent implements OnInit, BaseStep, AfterViewChecked, On
     this.forms.forEach((form: NgForm) => {
       const formSub = form.form.valueChanges.subscribe(() => {
         this.finishStepValid = this.areFormsValid();
-        console.log('Form changed, validation status:', this.finishStepValid);
       });
       this.finishFormSub.push(formSub);
     });

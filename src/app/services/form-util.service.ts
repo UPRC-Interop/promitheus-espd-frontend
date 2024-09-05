@@ -356,10 +356,13 @@ export class FormUtilService {
     criteria.forEach(cr => {
       let formValues = form.getRawValue();
       formValues = formValues[cr.uuid.valueOf()];
+      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       /* GES-131 Fix: set selected true because of server config file in create response from scratch */
-      if (this.utilities.isCreateResponse) {
-        cr.selected = true;
-      }
+      /* GitHub issue fix: #35 (Repository: espd-frontend) --> The following code block is commented to fix issue where export button was enabling Reduction of Candidates criterion checkbox. (Finish EO  step on create ESPD from scratch  response) */
+      // if (this.utilities.isCreateResponse) {
+      //   cr.selected = true;
+      // }
+      //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       // console.log(formValues);
 
       // let testFormValues = formValues[cr.uuid.valueOf()];
