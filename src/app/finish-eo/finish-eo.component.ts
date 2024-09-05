@@ -14,7 +14,16 @@
 /// limitations under the License.
 ///
 
-import {AfterViewChecked, AfterViewInit, Component, Input, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  ViewChild,
+  ViewChildren
+} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {FormGroup, NgForm} from '@angular/forms';
 import {FormUtilService} from '../services/form-util.service';
@@ -24,13 +33,14 @@ import {WizardSteps} from '../base/wizard-steps.enum';
 import {ExportType} from '../export/export-type.enum';
 import {UtilitiesService} from '../services/utilities.service';
 import {ApicallService} from '../services/apicall.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-finish-eo',
   templateUrl: './finish-eo.component.html',
   styleUrls: ['./finish-eo.component.css']
 })
-export class FinishEoComponent implements OnInit, BaseStep, AfterViewChecked {
+export class FinishEoComponent implements OnInit, BaseStep, OnChanges, OnDestroy {
 
   @ViewChildren('form') forms: QueryList<NgForm>;
   @ViewChild('dateInput') dateInput: NgForm;
@@ -42,6 +52,8 @@ export class FinishEoComponent implements OnInit, BaseStep, AfterViewChecked {
   @Input() selectionStepValid: boolean;
   @Input() finishStepValid: boolean;
 
+  // subscription
+  finishFormSub: Subscription[] = [];
 
   constructor(
     public dataService: DataService,
@@ -56,12 +68,21 @@ export class FinishEoComponent implements OnInit, BaseStep, AfterViewChecked {
 
   }
 
-
-  ngAfterViewChecked() {
-    this.forms.forEach((form: NgForm) => {
-      form.form.valueChanges.subscribe((value) => {
-        this.finishStepValid = this.areFormsValid();
+  ngOnChanges() {
+    if (this.forms !== undefined) {
+      this.forms.forEach((form: NgForm) => {
+        this.finishFormSub.push(form.form.valueChanges.subscribe((value) => {
+          this.finishStepValid = this.areFormsValid();
+          console.log('changes');
+        }));
       });
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.finishFormSub.forEach((sub) => {
+      sub.unsubscribe();
+      console.log('destroyed');
     });
   }
 
