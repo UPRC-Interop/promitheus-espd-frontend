@@ -14,18 +14,9 @@
 /// limitations under the License.
 ///
 
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  QueryList,
-  ViewChild,
-  ViewChildren
-} from '@angular/core';
+import {AfterViewChecked, Component, Input, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {DataService} from '../services/data.service';
-import {FormGroup, NgForm} from '@angular/forms';
+import {NgForm} from '@angular/forms';
 import {FormUtilService} from '../services/form-util.service';
 import {ValidationService} from '../services/validation.service';
 import {BaseStep} from '../base/base-step';
@@ -33,56 +24,78 @@ import {WizardSteps} from '../base/wizard-steps.enum';
 import {ExportType} from '../export/export-type.enum';
 import {UtilitiesService} from '../services/utilities.service';
 import {ApicallService} from '../services/apicall.service';
-import {Subscription} from 'rxjs';
+import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-finish-eo',
   templateUrl: './finish-eo.component.html',
   styleUrls: ['./finish-eo.component.css']
 })
-export class FinishEoComponent implements OnInit, BaseStep, OnChanges, OnDestroy {
+export class FinishEoComponent implements OnInit, BaseStep, AfterViewChecked, OnDestroy {
 
   @ViewChildren('form') forms: QueryList<NgForm>;
   @ViewChild('dateInput') dateInput: NgForm;
 
-  // @Input() form: FormGroup;
   @Input() startStepValid: boolean;
   @Input() procedureStepValid: boolean;
   @Input() exclusionStepValid: boolean;
   @Input() selectionStepValid: boolean;
   @Input() finishStepValid: boolean;
 
-  // subscription
+  // Subscription
   finishFormSub: Subscription[] = [];
+
+  private _CHECKBOX = new BehaviorSubject<boolean>(false);
+  checkbox$: Observable<boolean> = this._CHECKBOX.asObservable();
 
   constructor(
     public dataService: DataService,
     private formUtil: FormUtilService,
     private validationService: ValidationService,
     public utilities: UtilitiesService,
-    public APIService: ApicallService
+    public APIService: ApicallService,
+    public utilService: UtilitiesService
   ) {
   }
 
   ngOnInit() {
-
   }
 
-  ngOnChanges() {
-    if (this.forms !== undefined) {
-      this.forms.forEach((form: NgForm) => {
-        this.finishFormSub.push(form.form.valueChanges.subscribe((value) => {
-          this.finishStepValid = this.areFormsValid();
-          console.log('changes');
-        }));
-      });
-    }
+  ngAfterViewChecked() {
+    const checkboxSub = this.checkbox$.subscribe((checkboxValue) => {
+      if (checkboxValue) {
+        this.subscribeToForm();
+      } else {
+        if (this.utilService.isImportESPD) {
+          this.subscribeToForm();
+        } else {
+          this.finishStepValid = true;
+        }
+      }
+    });
   }
 
   ngOnDestroy(): void {
-    this.finishFormSub.forEach((sub) => {
-      sub.unsubscribe();
-      console.log('destroyed');
+    this.cleanupSubscriptions();
+  }
+
+  private cleanupSubscriptions() {
+    this.finishFormSub.forEach(sub => sub.unsubscribe());
+    this.finishFormSub = [];
+  }
+
+  public onCheckboxChange(event)  {
+    this._CHECKBOX.next(event);
+  }
+
+  private subscribeToForm() {
+    this.cleanupSubscriptions();
+    this.forms.forEach((form: NgForm) => {
+      const formSub = form.form.valueChanges.subscribe(() => {
+        this.finishStepValid = this.areFormsValid();
+        console.log('Form changed, validation status:', this.finishStepValid);
+      });
+      this.finishFormSub.push(formSub);
     });
   }
 
@@ -107,6 +120,7 @@ export class FinishEoComponent implements OnInit, BaseStep, OnChanges, OnDestroy
   }
 
   isExportPossible(): boolean {
-    return this.startStepValid && this.procedureStepValid && this.exclusionStepValid && this.selectionStepValid && this.finishStepValid && !this.dateInput.invalid;
+    return this.startStepValid && this.procedureStepValid && this.exclusionStepValid && this.selectionStepValid
+      && this.finishStepValid && !this.dateInput.invalid;
   }
 }

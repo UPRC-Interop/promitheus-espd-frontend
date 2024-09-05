@@ -28,6 +28,7 @@
             <mat-checkbox color="primary"
                           name='{{criteria.name+i}}'
                           [(ngModel)]="dataService.reductionCriteria[i].selected"
+                          (ngModelChange)="onCheckboxChange($event)"
                           [disabled]="dataService.isReadOnly()"></mat-checkbox>
             {{'espd.part5.reduction.hint' | translate}}
           </div>
