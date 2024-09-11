@@ -479,7 +479,7 @@
    "espd.crit.subcrit.name": "Name of the national subcriterion",
    "espd.crit.subcrit.description": "Description of the national subcriterion",
    "espd.crit.subcrit.additional.information": "Additional information; e.g. no evidences online",
-   "espd.validator.numberOjs": "Please enter a publication number in the valid format yyyy/S sss-nnnnnn",
+   "espd.validator.numberOjs": "Notice Number in the OJS is formed by Notice publication number: ΧΧΧΧΧΧ-ΥΥΥΥ and OJ S issue number: ΚΚΚ/ΥΥΥΥ (where YYYY is the year) as follows ΥΥΥΥ/S KKK-XXXXXX.",
    "espd.validator.matDatepickerParse": "Please enter a valid date in DD/MM/YYYY format.",
    "espd.validator.phoneNumber": "Please enter a valid phone number.",
    "espd.validator.percentage": "Please enter a percentage in valid format, e. g. 1.23",

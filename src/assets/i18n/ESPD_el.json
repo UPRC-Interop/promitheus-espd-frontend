@@ -479,7 +479,7 @@
    "espd.crit.subcrit.name": "Name of the national subcriterion",
    "espd.crit.subcrit.description": "Description of the national subcriterion",
    "espd.crit.subcrit.additional.information": "Additional information; e.g. no evidences online",
-   "espd.validator.numberOjs": "Please enter a publication number in the valid format Chr(92)Chr(34)yyyy/S sss-nnnnnnChr(92)Chr(34)",
+   "espd.validator.numberOjs": "Ο Αριθμός προκήρυξης διαμορφώνεται από τον Αριθμό δημοσίευσης της προκήρυξης: ΧΧΧΧΧΧ-ΥΥΥΥ και τον Αριθμό τεύχους ΕΕ S: ΚΚΚ/ΥΥΥΥ (όπου ΥΥΥΥ το έτος) ως εξής ΥΥΥΥ/S KKK-XXXXXX.",
    "espd.validator.matDatepickerParse": "Please enter a valid date in DD/MM/YYYY format.",
    "espd.validator.phoneNumber": "Please enter a valid phone number.",
    "espd.validator.percentage": "Please enter a percentage in valid format, e. g. Chr(92)Chr(34)1.23Chr(92)Chr(34)",
