@@ -15,7 +15,8 @@
 ///
 
 export class PlatformInfo {
-  version: string;
+  appVersion: string;
+  edmVersion: string;
   revision: string;
   name: string;
   buildTime: string;

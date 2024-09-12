@@ -18,10 +18,10 @@ import {Component, OnInit} from '@angular/core';
 import {DataService} from './services/data.service';
 import {TranslateService} from '@ngx-translate/core';
 import {Language} from './model/language.model';
-import {PlatformInfo} from "./model/platform-info";
-import {ApicallService} from "./services/apicall.service";
+import {PlatformInfo} from './model/platform-info';
+import {ApicallService} from './services/apicall.service';
 import {environment} from '../environments/environment';
-
+import {VERSION} from '../environments/environment.version';
 
 // import {NgForm, FormControl} from "@angular/forms";
 
@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
   language: Language[];
   platformInfo: PlatformInfo = null;
   platformInfoUrl: String = environment.apiUrl + 'platform-info';
-
+  revision = VERSION.revision;
 
   constructor(public dataService: DataService, public translate: TranslateService, private APIService: ApicallService) {
     // translate.setDefaultLang('ESPD_en');

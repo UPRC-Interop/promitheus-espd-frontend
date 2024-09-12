@@ -7,6 +7,7 @@
   },
   "scripts": {
     "ng": "ng",
+    "prestart": "node update-version.js",
     "start": "ng serve",
     "build": "ng build --prod",
     "build-azure" : "ng build --configuration=azure",
@@ -64,7 +65,7 @@
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
     "protractor": "~5.1.2",
-    "ts-node": "~4.1.0",
+    "ts-node": "^4.1.0",
     "tslint": "~5.9.1",
     "typescript": "~3.1.6"
   }

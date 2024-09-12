@@ -20,7 +20,7 @@
 <router-outlet></router-outlet>
 
 <div *ngIf="platformInfo" class="platformInfo">
-  <a href="{{platformInfoUrl}}">Version {{platformInfo.version}}</a><b> f1</b>
+  <a href="{{platformInfoUrl}}">App Version: {{platformInfo.appVersion}} EDM Version: {{platformInfo.edmVersion}} UI Revision: {{revision}}</a>
 </div>
 
 
