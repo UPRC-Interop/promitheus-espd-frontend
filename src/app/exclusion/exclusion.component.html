@@ -37,7 +37,7 @@
        <div class="exclusionCriteria" >
 
          <div class="criteria">
-           <mat-checkbox name="{{criteria.selected}}" color="primary"
+           <mat-checkbox color="primary" name="{{criteria.name}}"
                          [(ngModel)]="dataService.exclusionACriteria[i].selected"
                          [disabled]="dataService.exclusionACriteria[i].compulsory">{{criteria.propertyKeyMap.pk1 | translate}}</mat-checkbox>
            <div class="critDesc">{{criteria.propertyKeyMap.pk2 | translate}}</div>
@@ -93,7 +93,7 @@
         <div class="exclusionCriteria" >
 
           <div class="criteria">
-            <mat-checkbox name="{{criteria.selected}}" color="primary"
+            <mat-checkbox color="primary" name="{{criteria.name}}"
                           [(ngModel)]="dataService.exclusionBCriteria[i].selected"
                           [disabled]="dataService.exclusionBCriteria[i].compulsory">{{criteria.propertyKeyMap.pk1 | translate}}</mat-checkbox>
             <div class="critDesc">{{criteria.propertyKeyMap.pk2 | translate}}</div>
