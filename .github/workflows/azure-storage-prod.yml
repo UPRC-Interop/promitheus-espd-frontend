@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-22.04
     name: Build and Deploy Job
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v2
     - name: Use Node.js ${{ env.NODE_VERSION }}
       uses: actions/setup-node@v1
       with:
