@@ -30,4 +30,5 @@ jobs:
       uses: azure/cli@v2.1.0
       with:
         inlineScript: |
+          tdnf install -y azcopy
           az storage blob sync -c '$web' -s dist --connection-string '${{ secrets.AZURE_STORAGE_CONNECTION_STRING_STAGE }}'
