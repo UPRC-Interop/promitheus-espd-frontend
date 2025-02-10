@@ -27,7 +27,8 @@ jobs:
         npm install
         npm run build-azure-stage
     - name: Update Blobs
-      uses: azure/cli@v1
+      uses: azure/cli@v2
       with:
+        azcliversion: 2.63.0
         inlineScript: |
           az storage blob sync -c '$web' -s dist --connection-string '${{ secrets.AZURE_STORAGE_CONNECTION_STRING_STAGE }}'
