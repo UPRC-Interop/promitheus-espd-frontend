@@ -39,6 +39,6 @@ export class ValidationService {
   }
 
   public validateForm(form): boolean {
-    return form === null || !form.touched || form.valid;
+    return form === null || form.valid;
   }
 }

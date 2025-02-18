@@ -107,6 +107,8 @@ export class ProcedureEoComponent implements OnInit, BaseStep {
   }
 
   public areFormsValid(): boolean {
+    console.log('is eo form valid? ' + this.validationService.validateForm(this.dataService.eoLotCriterionForm));
+
     return this.validationService.validateFormsInComponent(this.forms) &&
       this.validationService.validateForm(this.ojsForm) &&
       this.validationService.validateForm(this.dataService.eoLotCriterionForm);
