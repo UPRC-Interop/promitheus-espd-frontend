@@ -116,9 +116,13 @@
             <div class="eCertis">
               <!--<h5>eCertis Information ...</h5>-->
               <ng-container *ngIf="!utilities.eCertisTemplate[cr.id]">
-                <button mat-raised-button
-                        (click)="dataService.onGetECertisData(cr, cr.id, dataService.getCountryCode(), utilities.selectedLang)">
+                <button mat-raised-button (click)="dataService.onGetECertisData(cr, cr.id, dataService.getCountryCode(), utilities.selectedLang)">
                   {{'espd.ecertis.more.information' | translate}}
+                  <ng-container *ngIf="(dataService.isLoading$(cr.id) | async)">
+                    <div class="spinner-container" style="display: inline-flex; align-items: center;">
+                      <mat-spinner [diameter]="20"></mat-spinner>
+                    </div>
+                  </ng-container>
                 </button>
               </ng-container>
               <div *ngIf="cr.subCriterionList.length === 0 && utilities.eCertisTemplate[cr.id]" class="eCertDesc" translate>espd.ecertis.404</div>
@@ -172,9 +176,13 @@
             <div class="eCertis">
               <!--<h5>eCertis Information ...</h5>-->
               <ng-container *ngIf="!utilities.eCertisTemplate[cr.id]">
-                <button mat-raised-button
-                        (click)="dataService.onGetECertisData(cr, cr.id, dataService.getCountryCode(), utilities.selectedLang)">
+                <button mat-raised-button (click)="dataService.onGetECertisData(cr, cr.id, dataService.getCountryCode(), utilities.selectedLang)">
                   {{'espd.ecertis.more.information' | translate}}
+                  <ng-container *ngIf="(dataService.isLoading$(cr.id) | async)">
+                    <div class="spinner-container" style="display: inline-flex; align-items: center;">
+                      <mat-spinner [diameter]="20"></mat-spinner>
+                    </div>
+                  </ng-container>
                 </button>
               </ng-container>
               <div *ngIf="cr.subCriterionList.length === 0 && utilities.eCertisTemplate[cr.id]" class="eCertDesc" translate>espd.ecertis.404</div>
@@ -276,9 +284,13 @@
               <div class="eCertis">
                 <!--<h5>eCertis Information ...</h5>-->
                 <ng-container *ngIf="!utilities.eCertisTemplate[cr.id]">
-                  <button mat-raised-button
-                          (click)="dataService.onGetECertisData(cr, cr.id, dataService.getCountryCode(), utilities.selectedLang)">
+                  <button mat-raised-button (click)="dataService.onGetECertisData(cr, cr.id, dataService.getCountryCode(), utilities.selectedLang)">
                     {{'espd.ecertis.more.information' | translate}}
+                    <ng-container *ngIf="(dataService.isLoading$(cr.id) | async)">
+                      <div class="spinner-container" style="display: inline-flex; align-items: center;">
+                        <mat-spinner [diameter]="20"></mat-spinner>
+                      </div>
+                    </ng-container>
                   </button>
                 </ng-container>
                 <div *ngIf="cr.subCriterionList.length === 0 && utilities.eCertisTemplate[cr.id]" class="eCertDesc" translate>espd.ecertis.404</div>
@@ -331,9 +343,13 @@
               <div class="eCertis">
                 <!--<h5>eCertis Information ...</h5>-->
                 <ng-container *ngIf="!utilities.eCertisTemplate[cr.id]">
-                  <button mat-raised-button
-                          (click)="dataService.onGetECertisData(cr, cr.id, dataService.getCountryCode(), utilities.selectedLang)">
+                  <button mat-raised-button (click)="dataService.onGetECertisData(cr, cr.id, dataService.getCountryCode(), utilities.selectedLang)">
                     {{'espd.ecertis.more.information' | translate}}
+                    <ng-container *ngIf="(dataService.isLoading$(cr.id) | async)">
+                      <div class="spinner-container" style="display: inline-flex; align-items: center;">
+                        <mat-spinner [diameter]="20"></mat-spinner>
+                      </div>
+                    </ng-container>
                   </button>
                 </ng-container>
                 <div *ngIf="cr.subCriterionList.length === 0 && utilities.eCertisTemplate[cr.id]" class="eCertDesc" translate>espd.ecertis.404</div>

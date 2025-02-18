@@ -44,6 +44,7 @@ import _ from 'lodash';
 import {Filter} from '../filter/filter.enum';
 import {CodelistService} from './codelist.service';
 import {ErrorResponse} from '../model/error-response';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 @Injectable()
 export class DataService {
@@ -98,6 +99,14 @@ export class DataService {
   selectedEOCountry = '';
   public EOForm: FormGroup;
 
+  private loadingStates: Map<string, BehaviorSubject<boolean>> = new Map();
+
+  isLoading$(euID: string): Observable<boolean> {
+    if (!this.loadingStates.has(euID)) {
+      this.loadingStates.set(euID, new BehaviorSubject<boolean>(false));
+    }
+    return this.loadingStates.get(euID).asObservable();
+  }
 
   /* =========================================== FORMS =============================================== */
 
@@ -2231,12 +2240,14 @@ export class DataService {
   }
 
   onGetECertisData(criterion: FullCriterion, euID: string, countryCode: string, language: string) {
+    this.loadingStates.get(euID).next(true);
     this.APIService.getECertisData(criterion, euID, countryCode, language)
       .then(res => {
         console.log('ECertis Data for EU id: ' + euID);
         criterion.subCriterionList = res.map(x => ({...x}));
         this.utilities.toggleECertis(euID);
         console.log(criterion);
+        this.loadingStates.get(euID).next(false);
       })
       .catch(err => {
         console.log(err);
@@ -2244,6 +2255,7 @@ export class DataService {
         console.log(err.error);
         const action = 'close';
         this.utilities.openSnackBar(error, action);
+        this.loadingStates.get(euID).next(false);
       });
   }
 
