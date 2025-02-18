@@ -34,6 +34,7 @@
       </mat-form-field>
       <mat-form-field>
         <input #ojs="ngModel" matInput name="noticeNumberOJS" [(ngModel)]="dataService.CADetails.procurementPublicationNumber" placeholder="{{'espd.part1.ojs.label' | translate}}" [disabled]="dataService.isReadOnly()" numberOjs>
+        <mat-hint>{{'espd.validator.numberOjs' | translate}}</mat-hint>
         <mat-error *ngIf="ojs.invalid">
           <input-validation-error [formControlErrors]="ojs.errors"></input-validation-error>
         </mat-error>
