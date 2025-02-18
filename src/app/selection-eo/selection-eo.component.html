@@ -102,7 +102,7 @@
       </ng-container>
 
       <ng-container *ngIf="dataService.selectionACriteria.length === 0">
-        <h4>No criteria selected</h4>
+        <h4>{{'espd.no.criteria.selected' | translate}}</h4>
       </ng-container>
 
       <mat-card *ngFor="let cr of dataService.selectionACriteria; let i=index">
@@ -160,7 +160,7 @@
         </div>
       </ng-container>
       <ng-container *ngIf="dataService.selectionBCriteria.length === 0">
-        <h4>No criteria selected</h4>
+        <h4>{{'espd.no.criteria.selected' | translate}}</h4>
       </ng-container>
       <mat-card *ngFor="let cr of dataService.selectionBCriteria; let i=index">
         <div class="selectionCriteria">
@@ -264,7 +264,7 @@
           </div>
         </ng-container>
         <ng-container *ngIf="dataService.selectionCCriteria.length === 0">
-          <h4>No criteria selected</h4>
+          <h4>{{'espd.no.criteria.selected' | translate}}</h4>
         </ng-container>
         <mat-card *ngFor="let cr of dataService.selectionCCriteria; let i=index">
           <div class="selectionCriteria">
@@ -319,7 +319,7 @@
           </div>
         </ng-container>
         <ng-container *ngIf="dataService.selectionDCriteria.length === 0">
-          <h4>No criteria selected</h4>
+          <h4>{{'espd.no.criteria.selected' | translate}}</h4>
         </ng-container>
         <mat-card *ngFor="let cr of dataService.selectionDCriteria; let i=index">
           <div class="selectionCriteria">

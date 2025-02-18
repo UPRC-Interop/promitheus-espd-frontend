@@ -28,6 +28,9 @@
 
         </mat-panel-description>
       </mat-expansion-panel-header>
+      <ng-container *ngIf="dataService.exclusionACriteria.length === 0">
+        <h4>{{'espd.no.criteria.selected' | translate}}</h4>
+      </ng-container>
       <ng-container *ngIf="dataService.exclusionACriteria.length !== 0">
         <div class="desc">
           <h4 translate>espd.part3.crit.eu.eo.grounds.criminal.conv.main.title</h4>
@@ -88,6 +91,9 @@
 
         </mat-panel-description>
       </mat-expansion-panel-header>
+      <ng-container *ngIf="dataService.exclusionBCriteria.length === 0">
+        <h4>{{'espd.no.criteria.selected' | translate}}</h4>
+      </ng-container>
       <ng-container *ngIf="dataService.exclusionBCriteria.length !== 0">
         <div class="desc">
           <h4 translate>espd.part3.crit.eu.eo.payment.taxes.main.title</h4>
@@ -145,6 +151,9 @@
 
         </mat-panel-description>
       </mat-expansion-panel-header>
+      <ng-container *ngIf="dataService.exclusionCCriteria.length === 0">
+        <h4>{{'espd.no.criteria.selected' | translate}}</h4>
+      </ng-container>
       <ng-container *ngIf="dataService.exclusionCCriteria.length !== 0">
         <div class="desc">
           <h4 translate>espd.part3.crit.eu.eo.main.breaching.obligations</h4>
@@ -202,6 +211,9 @@
 
         </mat-panel-description>
       </mat-expansion-panel-header>
+      <ng-container *ngIf="dataService.exclusionDCriteria.length === 0">
+        <h4>{{'espd.no.criteria.selected' | translate}}</h4>
+      </ng-container>
       <ng-container *ngIf="dataService.exclusionDCriteria.length !== 0">
 <!--        <div class="desc">-->
 <!--          <h4 translate>espd.part3.purely.national.main</h4>-->
