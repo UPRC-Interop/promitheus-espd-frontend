@@ -119,7 +119,11 @@ export class FinishEoComponent implements OnInit, BaseStep, AfterViewChecked, On
   }
 
   isExportPossible(): boolean {
+    let isCreateFromScratchFlow = false;
+    if (this.utilities.isEO && this.utilities.isCreateResponse) {
+      isCreateFromScratchFlow = true;
+    }
     return this.startStepValid && this.procedureStepValid && this.exclusionStepValid && this.selectionStepValid
-      && this.finishStepValid && !this.dateInput.invalid;
+      && this.finishStepValid && !this.dateInput.invalid && !isCreateFromScratchFlow;
   }
 }
